@@ -1,0 +1,98 @@
+[
+  {
+    "CampName": "Health Awareness Camp",
+    "Image": "health_awareness.jpg",
+    "CampFees": 50,
+    "DateTime": "2024-07-15T09:00:00Z",
+    "Location": "Community Center, Downtown",
+    "HealthcareProfessional": "Dr. Emily Clark",
+    "ParticipantCount": 120,
+    "Description": "A comprehensive camp focusing on general health check-ups and awareness.",
+    "Feedback": "Very informative and well-organized.",
+    "Ratings": 4.5
+  },
+  {
+    "CampName": "Dental Check-up Camp",
+    "Image": "dental_checkup.jpg",
+    "CampFees": 30,
+    "DateTime": "2024-06-20T10:00:00Z",
+    "Location": "Greenwood Park",
+    "HealthcareProfessional": "Dr. John Doe",
+    "ParticipantCount": 90,
+    "Description": "Free dental check-ups and consultation for all age groups.",
+    "Feedback": "Great service and very helpful staff.",
+    "Ratings": 4.7
+  },
+  {
+    "CampName": "Cardio Health Camp",
+    "Image": "cardio_health.jpg",
+    "CampFees": 75,
+    "DateTime": "2024-08-10T08:00:00Z",
+    "Location": "Sunshine Hospital",
+    "HealthcareProfessional": "Dr. Sarah Lee",
+    "ParticipantCount": 60,
+    "Description": "Specialized camp focusing on cardiovascular health.",
+    "Feedback": "Excellent guidance and thorough check-ups.",
+    "Ratings": 4.8
+  },
+  {
+    "CampName": "Vision Screening Camp",
+    "Image": "vision_screening.jpg",
+    "CampFees": 20,
+    "DateTime": "2024-09-05T11:00:00Z",
+    "Location": "Central Library Hall",
+    "HealthcareProfessional": "Dr. Michael Brown",
+    "ParticipantCount": 130,
+    "Description": "Free vision screening and consultation for all.",
+    "Feedback": "Very useful, highly recommend.",
+    "Ratings": 4.6
+  },
+  {
+    "CampName": "Child Health Camp",
+    "Image": "child_health.jpg",
+    "CampFees": 40,
+    "DateTime": "2024-07-25T09:30:00Z",
+    "Location": "City Health Clinic",
+    "HealthcareProfessional": "Dr. Anna Smith",
+    "ParticipantCount": 150,
+    "Description": "Focusing on child health and nutrition.",
+    "Feedback": "Great initiative for children's health.",
+    "Ratings": 4.9
+  },
+  {
+    "CampName": "Senior Citizen Health Camp",
+    "Image": "senior_citizen.jpg",
+    "CampFees": 35,
+    "DateTime": "2024-10-12T08:30:00Z",
+    "Location": "Old Town Community Hall",
+    "HealthcareProfessional": "Dr. Robert Green",
+    "ParticipantCount": 80,
+    "Description": "Health check-ups and consultations for senior citizens.",
+    "Feedback": "Very beneficial for the elderly.",
+    "Ratings": 4.7
+  },
+  {
+    "CampName": "Mental Health Camp",
+    "Image": "mental_health.jpg",
+    "CampFees": 60,
+    "DateTime": "2024-06-30T09:00:00Z",
+    "Location": "Riverside Park",
+    "HealthcareProfessional": "Dr. Laura White",
+    "ParticipantCount": 110,
+    "Description": "Focused on mental health awareness and counseling.",
+    "Feedback": "Much needed and very supportive.",
+    "Ratings": 4.8
+  },
+  {
+    "CampName": "Women's Health Camp",
+    "Image": "womens_health.jpg",
+    "CampFees": 55,
+    "DateTime": "2024-07-22T10:00:00Z",
+    "Location": "Maplewood Community Center",
+    "HealthcareProfessional": "Dr. Jessica Turner",
+    "ParticipantCount": 100,
+    "Description": "Dedicated to women's health and wellness.",
+    "Feedback": "Empowering and very helpful.",
+    "Ratings": 4.9
+  }
+]
