@@ -45,9 +45,9 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="fixed z-10 container mx-auto bg-opacity-30 lg:mx-auto bg-blue-100 shadow dark:bg-gray-800">
-      <div className="container relative px-6 py-4 mx-auto">
-        <div className="lg:flex lg:items-center lg:justify-between">
+    <nav className=" z-10   container mx-auto   bg-opacity-30  bg-blue-100 shadow dark:bg-gray-800">
+      <div className="px-6 py-4  relative ">
+        <div className="lg:flex  lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
             <a href="#">
               <img
