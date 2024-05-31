@@ -1,0 +1,50 @@
+[
+  {
+    "_id": 1,
+    "CampName": "Health Awareness Camp",
+    "Feedback": "Very informative and well-organized.",
+    "Ratings": 4.5
+  },
+  {
+    "_id": 2,
+    "CampName": "Dental Check-up Camp",
+    "Feedback": "Great service and very helpful staff.",
+    "Ratings": 4.7
+  },
+  {
+    "_id": 3,
+    "CampName": "Cardio Health Camp",
+    "Feedback": "Excellent guidance and thorough check-ups.",
+    "Ratings": 4.8
+  },
+  {
+    "_id": 4,
+    "CampName": "Vision Screening Camp",
+    "Feedback": "Very useful, highly recommend.",
+    "Ratings": 4.6
+  },
+  {
+    "_id": 5,
+    "CampName": "Child Health Camp",
+    "Feedback": "Great initiative for children's health.",
+    "Ratings": 4.9
+  },
+  {
+    "_id": 6,
+    "CampName": "Senior Citizen Health Camp",
+    "Feedback": "Very beneficial for the elderly.",
+    "Ratings": 4.7
+  },
+  {
+    "_id": 7,
+    "CampName": "Mental Health Camp",
+    "Feedback": "Much needed and very supportive.",
+    "Ratings": 4.8
+  },
+  {
+    "_id": 8,
+    "CampName": "Women's Health Camp",
+    "Feedback": "Empowering and very helpful.",
+    "Ratings": 4.9
+  }
+]

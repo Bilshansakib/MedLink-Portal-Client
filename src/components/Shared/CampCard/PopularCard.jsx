@@ -167,8 +167,8 @@ const PopularCard = ({ card }) => {
             </Tooltip>
           </div>
         </CardBody>
-        <CardFooter className="pt-3">
-          <Button size="lg" fullWidth={true}>
+        <CardFooter className="pt-3 ">
+          <Button className="border-b-4 bg-red-200" size="lg" fullWidth={true}>
             Reserve
           </Button>
         </CardFooter>
