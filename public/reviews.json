@@ -3,19 +3,19 @@
     "_id": 1,
     "CampName": "Health Awareness Camp",
     "Feedback": "Very informative and well-organized.",
-    "Ratings": 4.5
+    "Ratings": 4.0
   },
   {
     "_id": 2,
     "CampName": "Dental Check-up Camp",
     "Feedback": "Great service and very helpful staff.",
-    "Ratings": 4.7
+    "Ratings": 3.7
   },
   {
     "_id": 3,
     "CampName": "Cardio Health Camp",
     "Feedback": "Excellent guidance and thorough check-ups.",
-    "Ratings": 4.8
+    "Ratings": 2.8
   },
   {
     "_id": 4,
