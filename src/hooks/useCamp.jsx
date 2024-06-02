@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "./useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const useCamp = () => {
   const axiosSecure = useAxiosSecure();
 
-  const [camp, setCamp] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetch("http://localhost:9000/camp")
-      .then((res) => res.json())
-      .then((data) => {
-        setCamp(data);
-        setLoading(false);
-      });
-  }, []);
-  return [camp, loading];
+  const {
+    refetch,
+    data: camp = [],
+    isPending,
+  } = useQuery({
+    queryKey: ["camp"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/camps`);
+      return res.data;
+    },
+  });
+  return [camp, refetch, isPending];
+  // useEffect(() => {
+  //   fetch("http://localhost:9000/camps")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCamp(data);
+  //       setLoading(false);
+  //     });
+  // }, []);
+  // return [camp, loading];
 };
 
 export default useCamp;

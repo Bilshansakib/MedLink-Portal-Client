@@ -1,6 +1,9 @@
 import { Button, Card, Typography } from "@material-tailwind/react";
 import useCamp from "../../../hooks/useCamp";
 import { AiTwotoneDelete } from "react-icons/ai";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { TbHttpDelete } from "react-icons/tb";
 
 const ManageCamps = () => {
   const TABLE_HEAD = [
@@ -12,8 +15,32 @@ const ManageCamps = () => {
     "Action",
     "",
   ];
-  const [camp] = useCamp();
-
+  const [camp, refetch] = useCamp();
+  const axiosSecure = useAxiosSecure();
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/camps/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <>
       <Card className="h-full w-full overflow-scroll">
@@ -105,9 +132,14 @@ const ManageCamps = () => {
                     color="blue-gray"
                     className="font-medium"
                   >
-                    <Button onClick={() => handleDelete(data._id)} color="red">
-                      <AiTwotoneDelete />
-                    </Button>
+                    <button
+                      className="text-red"
+                      onClick={() => handleDelete(data._id)}
+                      color="red"
+                    >
+                      <AiTwotoneDelete className="text-red-600"></AiTwotoneDelete>
+                      <TbHttpDelete className="text-red-600" />
+                    </button>
                   </Typography>
                 </td>
               </tr>

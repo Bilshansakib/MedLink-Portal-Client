@@ -12,6 +12,7 @@ import { IoMdAnalytics } from "react-icons/io";
 import { FaHome } from "react-icons/fa";
 import { GiCampingTent } from "react-icons/gi";
 import { SiGooglecampaignmanager360 } from "react-icons/si";
+import useCamp from "../hooks/useCamp";
 const { Header, Sider, Content } = Layout;
 
 const Dashboard = () => {
@@ -19,6 +20,7 @@ const Dashboard = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const [camp] = useCamp();
   return (
     <div className="flex">
       <div className="  relative  min-h-screen w-full max-w-[18rem] flex-col rounded-xl bg-blue-200 bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
@@ -113,6 +115,11 @@ const Dashboard = () => {
                     </div>
 
                     <NavLink to="/dashboard/manageCamps">Manage Camps</NavLink>
+                    <div className="grid ml-auto place-items-center justify-self-end">
+                      <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900">
+                        <span className="">{camp.length}</span>
+                      </div>
+                    </div>
                   </div>
                   <div
                     role="button"
