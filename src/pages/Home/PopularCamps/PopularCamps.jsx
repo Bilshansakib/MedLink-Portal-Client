@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import PopularCard from "../../../components/Shared/CampCard/PopularCard";
 import useCamp from "../../../hooks/useCamp";
@@ -16,6 +15,7 @@ const PopularCamps = () => {
           <PopularCard key={card.CampName} card={card}></PopularCard>
         ))}
       </div>
+      <button>see all camp</button>
     </section>
   );
 };

@@ -1,5 +1,6 @@
 [
   {
+    "_id": "01",
     "CampName": "Health Awareness Camp",
     "Image": "health_awareness.jpg",
     "CampFees": 50,
@@ -12,6 +13,7 @@
     "Ratings": 4.5
   },
   {
+    "_id": "02",
     "CampName": "Dental Check-up Camp",
     "Image": "dental_checkup.jpg",
     "CampFees": 30,
@@ -24,6 +26,7 @@
     "Ratings": 4.7
   },
   {
+    "_id": "03",
     "CampName": "Cardio Health Camp",
     "Image": "cardio_health.jpg",
     "CampFees": 75,
@@ -36,6 +39,7 @@
     "Ratings": 4.8
   },
   {
+    "_id": "04",
     "CampName": "Vision Screening Camp",
     "Image": "vision_screening.jpg",
     "CampFees": 20,
@@ -48,6 +52,7 @@
     "Ratings": 4.6
   },
   {
+    "_id": "05",
     "CampName": "Child Health Camp",
     "Image": "child_health.jpg",
     "CampFees": 40,
@@ -60,6 +65,7 @@
     "Ratings": 4.9
   },
   {
+    "_id": "06",
     "CampName": "Senior Citizen Health Camp",
     "Image": "senior_citizen.jpg",
     "CampFees": 35,
@@ -72,6 +78,7 @@
     "Ratings": 4.7
   },
   {
+    "_id": "07",
     "CampName": "Mental Health Camp",
     "Image": "mental_health.jpg",
     "CampFees": 60,
@@ -84,6 +91,7 @@
     "Ratings": 4.8
   },
   {
+    "_id": "08",
     "CampName": "Women's Health Camp",
     "Image": "womens_health.jpg",
     "CampFees": 55,

@@ -4,7 +4,7 @@ const useCamp = () => {
   const [camp, setCamp] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("campsData.json")
+    fetch("http://localhost:9000/camp")
       .then((res) => res.json())
       .then((data) => {
         setCamp(data);
