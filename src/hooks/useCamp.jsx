@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useCamp = () => {
+  const axiosSecure = useAxiosSecure();
+
   const [camp, setCamp] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {

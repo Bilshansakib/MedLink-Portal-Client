@@ -4,6 +4,8 @@ import Home from "../pages/Home/Home";
 import SignUp from "../pages/SignUp/SignUp";
 import Login from "../pages/Login/Login";
 import AvailableCamps from "../pages/AvailableCamps/AvailableCamps";
+import Dashboard from "../layouts/Dashboard";
+import ManageCamps from "../pages/Dashboard/ManageCamps/ManageCamps";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +27,16 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp></SignUp>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "manageCamps",
+        element: <ManageCamps></ManageCamps>,
       },
     ],
   },
