@@ -1,6 +1,10 @@
-import { useState } from "react";
-import { Button, Drawer, List, Space } from "antd";
+import { useContext, useState } from "react";
+import { Button, Drawer, Space } from "antd";
+import { AuthContext } from "../../providers/AuthProvider";
+import { NavLink } from "react-router-dom";
 const NavViewProfile = () => {
+  const { user, logOut, loading } = useContext(AuthContext);
+
   const [open, setOpen] = useState(false);
   const [size, setSize] = useState();
   const showDefaultDrawer = () => {
@@ -24,9 +28,9 @@ const NavViewProfile = () => {
         >
           View Profile (378px)
         </Button>
-        <Button type="primary" onClick={showLargeDrawer}>
+        {/* <Button type="primary" onClick={showLargeDrawer}>
           Open Large Size (736px)
-        </Button>
+        </Button> */}
       </Space>
       <Drawer
         title={`${size} Drawer`}
@@ -43,7 +47,9 @@ const NavViewProfile = () => {
           </Space>
         }
       >
-        <p>Some contents...</p>
+        <ul>
+          <li>{user ? <NavLink to="dashboard">Dashboard</NavLink> : ""}</li>
+        </ul>
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Drawer>
