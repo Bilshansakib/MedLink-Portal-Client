@@ -1,8 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SocialMediaLogin = () => {
-  const { signIn, signInWithGoogle, loading } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const { signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
@@ -10,7 +12,15 @@ const SocialMediaLogin = () => {
     try {
       //Registration using google
       const result = await signInWithGoogle();
-      console.log(result);
+      console.log(result.user);
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+      });
+
       navigate(from, { replace: true });
     } catch (err) {
       console.log(err);

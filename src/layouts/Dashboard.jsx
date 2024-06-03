@@ -1,26 +1,16 @@
-import { createElement, useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
 import { IoMdAnalytics } from "react-icons/io";
 import { FaHome } from "react-icons/fa";
-import { GiCampingTent } from "react-icons/gi";
-import { SiGooglecampaignmanager360 } from "react-icons/si";
+import { GiArchiveRegister, GiCampingTent } from "react-icons/gi";
+import { SiFampay, SiGooglecampaignmanager360 } from "react-icons/si";
 import useCamp from "../hooks/useCamp";
-const { Header, Sider, Content } = Layout;
+import { MdGroupAdd, MdOutlineAddHome } from "react-icons/md";
+import useUsers from "../hooks/useUsers";
 
 const Dashboard = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
   const [camp] = useCamp();
+  const [users] = useUsers();
+  const isAdmin = true;
   return (
     <div className="flex">
       <div className="  relative  min-h-screen w-full max-w-[18rem] flex-col rounded-xl bg-blue-200 bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
@@ -96,41 +86,120 @@ const Dashboard = () => {
             <div className="overflow-hidden">
               <div className="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700">
                 <nav className="flex min-w-[240px] flex-col gap-1 p-0 font-sans text-base font-normal text-blue-gray-700">
-                  <div
-                    role="button"
-                    className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-                  >
-                    <div className="grid mr-4 place-items-center">
-                      <FaHome />
-                    </div>
+                  {isAdmin ? (
+                    <>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <FaHome />
+                        </div>
 
-                    <NavLink to="/dashboard/userHome">User Home</NavLink>
-                  </div>
-                  <div
-                    role="button"
-                    className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-                  >
-                    <div className="grid mr-4 place-items-center">
-                      <SiGooglecampaignmanager360 />
-                    </div>
-
-                    <NavLink to="/dashboard/manageCamps">Manage Camps</NavLink>
-                    <div className="grid ml-auto place-items-center justify-self-end">
-                      <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900">
-                        <span className="">{camp.length}</span>
+                        <NavLink to="/dashboard/organizerProfile">
+                          Organizer Profile/Home
+                        </NavLink>
                       </div>
-                    </div>
-                  </div>
-                  <div
-                    role="button"
-                    className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-                  >
-                    <div className="grid mr-4 place-items-center">
-                      <IoMdAnalytics />
-                    </div>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <MdOutlineAddHome />
+                        </div>
 
-                    <NavLink to="/dashboard/analytics">Analytics</NavLink>
-                  </div>
+                        <NavLink to="/dashboard/addCamps">
+                          Add Campaigns
+                        </NavLink>
+                      </div>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <SiGooglecampaignmanager360 />
+                        </div>
+
+                        <NavLink to="/dashboard/manageCamps">
+                          Manage Camps
+                        </NavLink>
+                        <div className="grid ml-auto place-items-center justify-self-end">
+                          <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900">
+                            <span className="">{camp.length}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <MdGroupAdd />
+                        </div>
+
+                        <NavLink to="/dashboard/manageUserCamps">
+                          Manage Registered Camps(all users)
+                        </NavLink>
+                        <div className="grid ml-auto place-items-center justify-self-end">
+                          <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900">
+                            <span className="">{users.length}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <FaHome />
+                        </div>
+
+                        <NavLink to="/dashboard/userProfile">
+                          user Profile/Home
+                        </NavLink>
+                      </div>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <IoMdAnalytics />
+                        </div>
+
+                        <NavLink to="/dashboard/analytics">
+                          User Analytics
+                        </NavLink>
+                      </div>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <GiArchiveRegister />
+                        </div>
+
+                        <NavLink to="/dashboard/userRegisteredCamp">
+                          User Registered Camp
+                        </NavLink>
+                      </div>
+                      <div
+                        role="button"
+                        className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                      >
+                        <div className="grid mr-4 place-items-center">
+                          <SiFampay />
+                        </div>
+
+                        <NavLink to="/dashboard/paymentHistory">
+                          User Payment history
+                        </NavLink>
+                      </div>
+                    </>
+                  )}
+                  {/* --------^^^^------- */}
                 </nav>
               </div>
             </div>
@@ -297,8 +366,7 @@ const Dashboard = () => {
       </div>
 
       <div className="flex-1 p-4">
-        <div className="h-8 rounded-box w-full border-4 "></div>
-        <div className="h-auto p-8 rounded-box w-full border-4 ">
+        <div className=" p-8 rounded-box  border-4 ">
           <Outlet></Outlet>
         </div>
       </div>

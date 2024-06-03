@@ -1,23 +1,39 @@
-import { Card, Typography } from "@material-tailwind/react";
-import useCamp from "../../../hooks/useCamp";
-import { AiTwotoneDelete } from "react-icons/ai";
-import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Button, Card, Typography } from "@material-tailwind/react";
+import { AiTwotoneDelete } from "react-icons/ai";
 import { TbHttpDelete } from "react-icons/tb";
+import Swal from "sweetalert2";
+import useUsers from "../../../hooks/useUsers";
+import { FaUser } from "react-icons/fa6";
 
-const ManageCamps = () => {
-  const TABLE_HEAD = [
-    "",
-    "Name",
-    "Healthcare Prof..",
-    "Date & Time",
-    "Location",
-    "Action",
-    "",
-  ];
-  const [camp, refetch] = useCamp();
+const ManageUserCamps = () => {
   const axiosSecure = useAxiosSecure();
-  const handleDelete = (id) => {
+  const [users, refetch] = useUsers();
+
+  //   const { data: users = [], refetch } = useQuery({
+  //     queryKey: ["users"],
+  //     queryFn: async () => {
+  //       const res = await axiosSecure.get(`/users`);
+  //       return res.data;
+  //     },
+  //   });
+  const handleMakeAdmin = (user) => {
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Great, ${user.name} is an Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+  console.log(users);
+  const handleDeleteUser = (user) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -28,7 +44,8 @@ const ManageCamps = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/camps/${id}`).then((res) => {
+        console.log(user._id);
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -41,8 +58,20 @@ const ManageCamps = () => {
       }
     });
   };
+  const TABLE_HEAD = [
+    "",
+    "Name",
+    "Healthcare Prof..",
+    "Date & Time",
+    "Location",
+    "Action",
+    "",
+  ];
   return (
-    <>
+    <div>
+      <div>
+        <h2>Manage Registered Camps of (User ({users.length}))</h2>
+      </div>
       <Card className="h-full w-full overflow-scroll">
         <table className="w-full min-w-max table-auto text-left">
           <thead>
@@ -64,8 +93,8 @@ const ManageCamps = () => {
             </tr>
           </thead>
           <tbody>
-            {camp.map((data, index) => (
-              <tr key={data._id} className="even:bg-blue-gray-50/50">
+            {users.map((user, index) => (
+              <tr key={user._id} className="even:bg-blue-gray-50/50">
                 <td className="p-4">
                   <Typography
                     variant="small"
@@ -81,7 +110,7 @@ const ManageCamps = () => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {data.CampName}
+                    {user.name}
                   </Typography>
                 </td>
                 <td className="p-4">
@@ -90,7 +119,7 @@ const ManageCamps = () => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {data.HealthcareProfessional}
+                    {user.email}
                   </Typography>
                 </td>
                 <td className="p-4">
@@ -99,7 +128,7 @@ const ManageCamps = () => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {data.DateTime}
+                    {user.DateTime}
                   </Typography>
                 </td>
                 <td className="p-4">
@@ -110,7 +139,7 @@ const ManageCamps = () => {
                     color="blue-gray"
                     className="font-medium"
                   >
-                    {data.Location}
+                    {user.role}
                   </Typography>
                 </td>
                 <td className="p-4">
@@ -121,7 +150,16 @@ const ManageCamps = () => {
                     color="blue-gray"
                     className="font-medium"
                   >
-                    Edit
+                    {user.role === "admin" ? (
+                      "admin"
+                    ) : (
+                      <Button
+                        onClick={() => handleMakeAdmin(user)}
+                        variant="text"
+                      >
+                        <FaUser></FaUser>
+                      </Button>
+                    )}
                   </Typography>
                 </td>
                 <td className="p-4">
@@ -134,7 +172,7 @@ const ManageCamps = () => {
                   >
                     <button
                       className="text-red"
-                      onClick={() => handleDelete(data._id)}
+                      onClick={() => handleDeleteUser(user)}
                       color="red"
                     >
                       <AiTwotoneDelete className="text-red-600"></AiTwotoneDelete>
@@ -147,8 +185,8 @@ const ManageCamps = () => {
           </tbody>
         </table>
       </Card>
-    </>
+    </div>
   );
 };
 
-export default ManageCamps;
+export default ManageUserCamps;

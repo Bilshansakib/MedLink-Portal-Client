@@ -7,6 +7,7 @@ import AvailableCamps from "../pages/AvailableCamps/AvailableCamps";
 import Dashboard from "../layouts/Dashboard";
 import ManageCamps from "../pages/Dashboard/ManageCamps/ManageCamps";
 import PrivateRoute from "./PrivateRoute";
+import ManageUserCamps from "../pages/Dashboard/ManageUserCamps.jsx/ManageUserCamps";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "manageCamps",
         element: <ManageCamps></ManageCamps>,
+      },
+      {
+        path: "manageUserCamps",
+        element: <ManageUserCamps></ManageUserCamps>,
       },
     ],
   },
