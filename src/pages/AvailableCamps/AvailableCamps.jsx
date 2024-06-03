@@ -15,7 +15,8 @@ import {
 import { IconButton } from "@material-tailwind/react";
 
 const AvailableCamps = () => {
-  const [camp, loading] = useCamp();
+  const [camp, isPending] = useCamp();
+  console.log(isPending);
   return (
     <div className="container mx-auto">
       <Helmet>
@@ -38,7 +39,7 @@ const AvailableCamps = () => {
         </div>
 
         <TabPanel>
-          {loading ? (
+          {!isPending ? (
             <>
               <div className="justify-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {camp.map((c) => (
@@ -68,7 +69,7 @@ const AvailableCamps = () => {
           )}
         </TabPanel>
         <TabPanel>
-          {loading ? (
+          {!isPending ? (
             <>
               <div className="justify-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {camp.map((c) => (
@@ -98,7 +99,7 @@ const AvailableCamps = () => {
           )}
         </TabPanel>
       </Tabs>
-      {/* {loading ? (
+      {/* {isPending ? (
         <>
           <div className="justify-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {camp.map((c) => (

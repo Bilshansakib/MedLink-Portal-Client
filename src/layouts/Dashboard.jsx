@@ -6,11 +6,13 @@ import { SiFampay, SiGooglecampaignmanager360 } from "react-icons/si";
 import useCamp from "../hooks/useCamp";
 import { MdGroupAdd, MdOutlineAddHome } from "react-icons/md";
 import useUsers from "../hooks/useUsers";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [camp] = useCamp();
   const [users] = useUsers();
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   return (
     <div className="flex">
       <div className="  relative  min-h-screen w-full max-w-[18rem] flex-col rounded-xl bg-blue-200 bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
