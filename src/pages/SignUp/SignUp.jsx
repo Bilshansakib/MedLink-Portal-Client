@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
@@ -21,10 +24,27 @@ const SignUp = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile info updated");
+          // console.log("user profile info in database");
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user inserted");
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: `Welcome, ${data.name}`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+              navigate("/");
+            }
+          });
           reset();
           //   TODO: Sweet Alert
-          navigate("/");
         })
         .catch((error) => console.log(error));
     });
@@ -225,12 +245,12 @@ const SignUp = () => {
             />
 
             <div className="mt-6 text-center ">
-              <a
-                href="#"
+              <NavLink
+                to="/login"
                 className="text-sm text-blue-500 hover:underline dark:text-blue-400"
               >
                 Already have an account?
-              </a>
+              </NavLink>
             </div>
           </div>
         </form>

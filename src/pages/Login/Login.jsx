@@ -1,14 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import SocialMediaLogin from "../../components/SocialMediaLogin/SocialMediaLogin";
+import useAuth from "../../hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { FaHandHoldingMedical } from "react-icons/fa6";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loading } = useAuth();
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -56,11 +59,11 @@ const Login = () => {
             Welcome back!
           </p>
 
-          <a
+          {/* <a
             href="#"
             className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
-            <div className="px-4 py-2">
+            <button  className="px-4 py-2">
               <svg className="w-6 h-6" viewBox="0 0 40 40">
                 <path
                   d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
@@ -79,13 +82,13 @@ const Login = () => {
                   fill="#1976D2"
                 />
               </svg>
-            </div>
+            </button>
 
             <span className="w-5/6 px-4 py-3 font-bold text-center">
               Sign in with Google
             </span>
-          </a>
-
+          </a> */}
+          <SocialMediaLogin></SocialMediaLogin>
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
 
@@ -150,12 +153,16 @@ const Login = () => {
 
             <div className="mt-6">
               <button
-                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-blue-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
                 type="submit"
                 value="Login"
                 disabled={disabled}
               >
-                Login
+                {loading ? (
+                  <FaHandHoldingMedical className="animate-spin m-auto" />
+                ) : (
+                  <p>Continue</p>
+                )}
               </button>
             </div>
           </form>
