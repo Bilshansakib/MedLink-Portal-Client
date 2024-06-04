@@ -1,6 +1,7 @@
 import axios from "axios";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const axiosSecure = axios.create({
   baseURL: "http://localhost:9000",
@@ -35,8 +36,7 @@ const useAxiosSecure = () => {
       // console.log('status error in the interceptor', status);
       // for 401 or 403 logout the user and move the user to the login
       if (status === 401 || status === 403) {
-        await logOut();
-        navigate("/login");
+        // todo: log out user and navigate login
       }
       return Promise.reject(error);
     }
