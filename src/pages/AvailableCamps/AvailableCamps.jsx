@@ -4,14 +4,9 @@ import useCamp from "../../hooks/useCamp";
 import AllAvailableCard from "../../components/Shared/CampCard/AllAvailableCard";
 import { Avatar, Skeleton } from "antd";
 import Meta from "antd/es/card/Meta";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab, Tabs, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import {
-  TfiLayoutColumn2,
-  TfiLayoutColumn3,
-  TfiLayoutGrid2Alt,
-  TfiLayoutGrid3Alt,
-} from "react-icons/tfi";
+import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
 import {
   Button,
   IconButton,
@@ -24,6 +19,7 @@ import {
 const AvailableCamps = () => {
   const [camp, isPending] = useCamp();
   console.log(isPending);
+  console.log(camp);
   return (
     <div className="container mx-auto">
       <Helmet>

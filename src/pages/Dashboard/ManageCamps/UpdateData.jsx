@@ -15,6 +15,7 @@ const UpdateData = () => {
   const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
   const {
+    _id,
     CampName,
     Image,
     CampFees,
@@ -46,18 +47,18 @@ const UpdateData = () => {
         Description: data.Description,
         Location: data.Location,
       };
-      console.table(campData);
-      const campsResponse = await axiosSecure.post("/camps", campData);
-      console.log(campsResponse.data.insertedId);
-      if (campsResponse.data.insertedId) {
+      //   update
+      const campsResponse = await axiosSecure.patch(`/camps/${_id}`, campData);
+      console.log(campsResponse.data);
+      if (campsResponse.data.modifiedCount > 0) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.CampName} is added to the menu.`,
+          title: `${data.CampName} is updated to the menu.`,
           showConfirmButton: false,
           timer: 1500,
         });
-        reset();
+        // reset();
       }
     }
   };
@@ -73,35 +74,31 @@ const UpdateData = () => {
             <div className="space-y-4 w-full">
               <Input
                 defaultValue={CampName}
-                {...register("CampName", { required: true })}
+                {...register("CampName")}
                 variant="outlined"
                 label="Camp Name"
                 placeholder="camp name"
               />
               <Input
                 defaultValue={HealthcareProfessional}
-                {...register("HealthcareProfessional", { required: true })}
+                {...register("HealthcareProfessional")}
                 variant="outlined"
                 label="Healthcare Professional"
                 placeholder="Healthcare Professional"
               />
-              <Input
-                defaultValue={Image}
-                {...register("image", { required: true })}
-                type="file"
-              ></Input>
+              {/* <Input {...register("image")} type="file"></Input> */}
             </div>
             <div className="space-y-2 w-full">
               <Input
                 defaultValue={CampFees}
-                {...register("CampFees", { required: true })}
+                {...register("CampFees")}
                 variant="standard"
                 label="Camp Fees"
                 placeholder="Camp Fees"
               />
               <Input
                 defaultValue={Location}
-                {...register("Location", { required: true })}
+                {...register("Location")}
                 variant="standard"
                 label="Location"
                 placeholder="Location"
@@ -109,11 +106,12 @@ const UpdateData = () => {
 
               <Input
                 defaultValue={DateTime}
-                {...register("DateTime", { required: true })}
+                {...register("DateTime")}
                 variant="standard"
                 label="Date & Time"
                 placeholder="Date & Time"
               />
+              <Input Value={Image} {...register("image")} type="file"></Input>
             </div>
           </div>
           <Input
@@ -126,7 +124,7 @@ const UpdateData = () => {
 
           <Button type="submit" className="flex  gap-2 mt-4">
             <FaUserDoctor />
-            add camp
+            Update Camp
           </Button>
         </form>
       </div>

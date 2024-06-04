@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMdAnalytics } from "react-icons/io";
 import { FaHome } from "react-icons/fa";
 import { GiArchiveRegister, GiCampingTent } from "react-icons/gi";
@@ -264,7 +264,7 @@ const Dashboard = () => {
                 <FaHome />
               </div>
 
-              <NavLink to="/home">Home</NavLink>
+              <Link to="/">Home</Link>
             </div>
             <div
               role="button"

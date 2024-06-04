@@ -33,12 +33,12 @@ const ManageCamps = () => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/camps/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            refetch();
             Swal.fire({
               title: "Deleted!",
-              text: "Your file has been deleted.",
+              text: `Your camp data has been deleted.`,
               icon: "success",
             });
+            refetch();
           }
         });
       }
@@ -57,12 +57,12 @@ const ManageCamps = () => {
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                  className="border-b  border-blue-gray-100 bg-blue-gray-50 p-4"
                 >
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal leading-none opacity-70"
+                    className="font-bold text-xl leading-none opacity-70"
                   >
                     {head}
                   </Typography>
@@ -148,8 +148,13 @@ const ManageCamps = () => {
                       onClick={() => handleDelete(data._id)}
                       color="red"
                     >
-                      <AiTwotoneDelete className="text-red-600"></AiTwotoneDelete>
-                      <TbHttpDelete className="text-red-600" />
+                      <Button
+                        variant="outlined"
+                        className="flex justify-center gap-1"
+                      >
+                        <AiTwotoneDelete className="text-red-600"></AiTwotoneDelete>
+                        <TbHttpDelete className="text-red-600" />
+                      </Button>
                     </button>
                   </Typography>
                 </td>

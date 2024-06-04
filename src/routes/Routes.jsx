@@ -12,6 +12,7 @@ import AddCamps from "../pages/Dashboard/AddCamps/AddCamps";
 import AdminRoute from "./AdminRoute";
 import UpdateData from "../pages/Dashboard/ManageCamps/UpdateData";
 import { getAllCamps } from "../api/camp";
+import CampDetails from "../pages/Home/CampDetails/CampDetails";
 
 export const router = createBrowserRouter([
   {
@@ -23,8 +24,20 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "campDetails/:id",
+        element: <CampDetails></CampDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/camps/${params.id}`),
+      },
+      {
         path: "availableCamps",
         element: <AvailableCamps></AvailableCamps>,
+      },
+      {
+        path: "availableCamps/campDetails/:id",
+        element: <CampDetails></CampDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/camps/${params.id}`),
       },
       {
         path: "login",
