@@ -26,7 +26,6 @@ const AvailableCamps = () => {
         <title>Medi+ | Available Camps</title>
       </Helmet>
       <CampsCover></CampsCover>
-      <h2>{camp.length}</h2>
 
       <Tabs>
         <div className="flex justify-end">
