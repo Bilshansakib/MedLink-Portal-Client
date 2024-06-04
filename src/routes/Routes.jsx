@@ -10,6 +10,8 @@ import PrivateRoute from "./PrivateRoute";
 import ManageUserCamps from "../pages/Dashboard/ManageUserCamps.jsx/ManageUserCamps";
 import AddCamps from "../pages/Dashboard/AddCamps/AddCamps";
 import AdminRoute from "./AdminRoute";
+import UpdateData from "../pages/Dashboard/ManageCamps/UpdateData";
+import { getAllCamps } from "../api/camp";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +48,17 @@ export const router = createBrowserRouter([
       {
         path: "manageCamps",
         element: <ManageCamps></ManageCamps>,
+      },
+      {
+        path: "updateData/:id",
+        element: (
+          <AdminRoute>
+            <UpdateData></UpdateData>
+          </AdminRoute>
+        ),
+        // loader: ({ params }) => getAllCamps(params.id),
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/camps/${params.id}`),
       },
       {
         path: "manageUserCamps",

@@ -1,9 +1,12 @@
-import { Card, Typography } from "@material-tailwind/react";
+import { Button, Card, Typography } from "@material-tailwind/react";
 import useCamp from "../../../hooks/useCamp";
 import { AiTwotoneDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { TbHttpDelete } from "react-icons/tb";
+import { RxUpdate } from "react-icons/rx";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 const ManageCamps = () => {
   const TABLE_HEAD = [
@@ -12,8 +15,8 @@ const ManageCamps = () => {
     "Healthcare Prof..",
     "Date & Time",
     "Location",
-    "Action",
-    "",
+    "Update",
+    "Delete",
   ];
   const [camp, refetch] = useCamp();
   const axiosSecure = useAxiosSecure();
@@ -43,8 +46,12 @@ const ManageCamps = () => {
   };
   return (
     <>
+      <SectionTitle
+        heading="Manage Your Campaign"
+        subHeading="campaign is essential for the society"
+      ></SectionTitle>
       <Card className="h-full w-full overflow-scroll">
-        <table className="w-full min-w-max table-auto text-left">
+        <table className="w-full  table-auto text-left">
           <thead>
             <tr>
               {TABLE_HEAD.map((head) => (
@@ -119,9 +126,13 @@ const ManageCamps = () => {
                     href="#"
                     variant="small"
                     color="blue-gray"
-                    className="font-medium"
+                    className="font-medium flex "
                   >
-                    Edit
+                    <Link to={`/dashboard/updateData/${data._id}`}>
+                      <Button variant="outlined">
+                        <RxUpdate />
+                      </Button>
+                    </Link>
                   </Typography>
                 </td>
                 <td className="p-4">
@@ -130,7 +141,7 @@ const ManageCamps = () => {
                     href="#"
                     variant="small"
                     color="blue-gray"
-                    className="font-medium"
+                    className="font-medium flex justify-center"
                   >
                     <button
                       className="text-red"

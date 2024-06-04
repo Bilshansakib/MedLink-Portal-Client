@@ -46,9 +46,7 @@ const AllAvailableCard = ({ card }) => {
           ]}
         >
           <Meta
-            avatar={
-              <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=2" />
-            }
+            avatar={<Avatar src={Image} />}
             title="Card title"
             description="This is the description"
           />

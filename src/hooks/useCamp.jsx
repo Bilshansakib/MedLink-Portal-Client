@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
@@ -10,7 +9,7 @@ const useCamp = () => {
     data: camp = [],
     isPending,
   } = useQuery({
-    queryKey: ["camp"],
+    queryKey: ["camps"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/camps`);
       return res.data;
