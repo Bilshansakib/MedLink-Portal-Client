@@ -119,7 +119,10 @@ const CampDetails = () => {
                 <Button>join us</Button>
               </Link>
             )} */}
-            <UserRegisterModal data={data}></UserRegisterModal>
+            <UserRegisterModal
+              handleOpen={handleOpen}
+              data={data}
+            ></UserRegisterModal>
           </DialogBody>
         </Dialog>
       </section>

@@ -13,6 +13,7 @@ import AdminRoute from "./AdminRoute";
 import UpdateData from "../pages/Dashboard/ManageCamps/UpdateData";
 import { getAllCamps } from "../api/camp";
 import CampDetails from "../pages/Home/CampDetails/CampDetails";
+import YourProfile from "../pages/Dashboard/YourProfile/YourProfile";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,15 @@ export const router = createBrowserRouter([
           <AdminRoute>
             <AddCamps></AddCamps>
           </AdminRoute>
+        ),
+      },
+      // user routes
+      {
+        path: "userProfile",
+        element: (
+          <PrivateRoute>
+            <YourProfile></YourProfile>
+          </PrivateRoute>
         ),
       },
     ],
