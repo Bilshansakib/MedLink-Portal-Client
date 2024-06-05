@@ -4,14 +4,24 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialMediaLogin from "../../components/SocialMediaLogin/SocialMediaLogin";
 import useAuth from "../../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { FaHandHoldingMedical } from "react-icons/fa6";
+import toast from "react-hot-toast";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
-  const { signIn, loading } = useAuth();
+  const { signIn, user, loading } = useAuth();
+  const location = useLocation();
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
+  const from = location.state || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -35,6 +45,8 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+      navigate(from, { replace: true });
+      toast.success("Signin Successful");
     });
   };
   console.log(disabled);
