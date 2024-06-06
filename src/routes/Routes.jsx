@@ -11,10 +11,10 @@ import ManageUserCamps from "../pages/Dashboard/ManageUserCamps.jsx/ManageUserCa
 import AddCamps from "../pages/Dashboard/AddCamps/AddCamps";
 import AdminRoute from "./AdminRoute";
 import UpdateData from "../pages/Dashboard/ManageCamps/UpdateData";
-import { getAllCamps } from "../api/camp";
 import CampDetails from "../pages/Home/CampDetails/CampDetails";
 import YourProfile from "../pages/Dashboard/YourProfile/YourProfile";
-
+import Payment from "../pages/Dashboard/Payment/Payment";
+import YourCamps from "../pages/Dashboard/YourCamps/YourCamps";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -96,6 +96,19 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <YourProfile></YourProfile>
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "RegCamps",
+        element: (
+          <PrivateRoute>
+            <YourCamps></YourCamps>
           </PrivateRoute>
         ),
       },

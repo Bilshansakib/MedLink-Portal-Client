@@ -7,10 +7,14 @@ import useCamp from "../hooks/useCamp";
 import { MdGroupAdd, MdOutlineAddHome } from "react-icons/md";
 import useUsers from "../hooks/useUsers";
 import useAdmin from "../hooks/useAdmin";
+import useParticipator from "../hooks/useParticipator";
+import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
+  const { logOut } = useAuth();
   const [camp] = useCamp();
   const [users] = useUsers();
+  const [participator] = useParticipator();
   const [isAdmin] = useAdmin();
   console.log(isAdmin);
   return (
@@ -184,9 +188,14 @@ const Dashboard = () => {
                             <GiArchiveRegister />
                           </div>
 
-                          <NavLink to="/dashboard/userRegisteredCamp">
-                            User Registered Camp
+                          <NavLink to="/dashboard/RegCamps">
+                            Your Registered Camps
                           </NavLink>
+                          <div className="grid ml-auto place-items-center justify-self-end">
+                            <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-full select-none whitespace-nowrap bg-blue-gray-500/20 text-blue-gray-900">
+                              <span className="">{participator.length}</span>
+                            </div>
+                          </div>
                         </div>
                         <div
                           role="button"
@@ -196,10 +205,20 @@ const Dashboard = () => {
                             <SiFampay />
                           </div>
 
-                          <NavLink to="/dashboard/paymentHistory">
+                          <NavLink to="/dashboard/payment">
                             User Payment history
                           </NavLink>
                         </div>
+                        {/* <div
+                          role="button"
+                          className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                        >
+                          <div className="grid mr-4 place-items-center">
+                            <SiFampay />
+                          </div>
+
+                          <NavLink to="/dashboard/RegCamps">lets Go</NavLink>
+                        </div> */}
                       </>
                     )}
                     {/* --------^^^^------- */}
@@ -363,7 +382,7 @@ const Dashboard = () => {
                   ></path>
                 </svg>
               </div>
-              Log Out
+              <button>Log Out</button>
             </div>
           </nav>
         </div>

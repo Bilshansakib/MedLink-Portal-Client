@@ -12,18 +12,22 @@ import {
 
 import "react-day-picker/dist/style.css";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useState } from "react";
 import { FaHome } from "react-icons/fa";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const UserRegisterModal = ({ data, handleOpen }) => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const axiosPublic = useAxiosPublic();
 
   const todaysDate = new Date().toDateString();
   const {
+    _id,
     CampName,
     Image,
     CampFees,
@@ -39,6 +43,7 @@ const UserRegisterModal = ({ data, handleOpen }) => {
   const onSubmit = async (data) => {
     console.log(data);
     const registerData = {
+      CampId: _id,
       CampName,
       Image,
       CampFees,
@@ -55,9 +60,20 @@ const UserRegisterModal = ({ data, handleOpen }) => {
       },
       Participant_Count: 0,
     };
+    console.log(registerData);
     try {
-      const { data } = await axiosPublic.post("/participator", registerData);
-      console.log(data);
+      const { data } = await axiosPublic.post("/registered", registerData);
+      console.log(data.insertedId);
+      if (data.insertedId) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: ` Thanks For Joining Us`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/dashboard/RegCamps");
+      }
     } catch (err) {
       console.log(err);
     }

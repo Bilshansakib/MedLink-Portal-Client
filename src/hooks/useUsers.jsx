@@ -3,6 +3,7 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const useUsers = () => {
   const axiosSecure = useAxiosSecure();
+
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -10,6 +11,7 @@ const useUsers = () => {
       return res.data;
     },
   });
+
   return [users, refetch];
 };
 

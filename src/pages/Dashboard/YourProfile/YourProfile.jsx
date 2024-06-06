@@ -11,7 +11,7 @@ const YourProfile = () => {
   const [participator, refetch] = useParticipate();
 
   const participate = participator[0]?.Participator;
-  console.log(participator[0]._id);
+  console.log(participator[0]?._id);
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -49,18 +49,18 @@ const YourProfile = () => {
             <Space size={12}>
               <Image
                 width={200}
-                src={participate.photo}
+                src={participate?.photo}
                 placeholder={
-                  <Image preview={false} src={participate.photo} width={200} />
+                  <Image preview={false} src={participate?.photo} width={200} />
                 }
               />
             </Space>
           </div>
           <div className=" space-y-4">
             <div>
-              <h2 className="text-2xl font-semibold">{participate.name}</h2>
+              <h2 className="text-2xl font-semibold">{participate?.name}</h2>
               <span className="text-sm dark:text-gray-600">
-                {participator[0].Occupation}
+                {participator[0]?.Occupation}
               </span>
             </div>
             <div className="space-y-1">
@@ -76,7 +76,7 @@ const YourProfile = () => {
                     d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"
                   ></path>
                 </svg>
-                <span className="dark:text-gray-600">{participate.email}</span>
+                <span className="dark:text-gray-600">{participate?.email}</span>
               </span>
               <span className="flex items-center space-x-2">
                 <svg
@@ -91,7 +91,7 @@ const YourProfile = () => {
                   ></path>
                 </svg>
                 <span className="dark:text-gray-600">
-                  +{participator[0].ContactNumber}
+                  +{participator[0]?.ContactNumber}
                 </span>
               </span>
             </div>
@@ -99,7 +99,10 @@ const YourProfile = () => {
           <div className=" flex text-center gap-2 justify-center items-center flex-col">
             {/* todo: edit */}
             <Button size="sm">Edit</Button>
-            <Button onClick={() => handleDelete(participator[0]._id)} size="sm">
+            <Button
+              onClick={() => handleDelete(participator[0]?._id)}
+              size="sm"
+            >
               Delete Profile
             </Button>
           </div>
