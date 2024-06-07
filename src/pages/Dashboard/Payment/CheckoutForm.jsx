@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useParticipator from "../../../hooks/useParticipator";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 const CheckoutForm = () => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -15,6 +16,7 @@ const CheckoutForm = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [participator, refetch] = useParticipator();
+  const axiosPublic = useAxiosPublic();
 
   const totalPrice = participator.reduce(
     (total, item) => total + item.CampFees,
@@ -57,7 +59,7 @@ const CheckoutForm = () => {
       console.log("payment method", paymentMethod);
       setError("");
     }
-  
+
     // confirm payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -79,31 +81,31 @@ const CheckoutForm = () => {
         setTransactionId(paymentIntent.id);
 
         // now save the payment in the database
-    //     const payment = {
-    //       email: user.email,
-    //       CampFees: totalPrice,
-    //       transactionId: paymentIntent.id,
-    //       date: new Date(), // utc date convert. use moment js to
-    //       cartIds: participator.map((item) => item._id),
-    //       menuItemIds: participator.map((item) => item.menuId),
-    //       status: "pending",
-    //     };
+        const payment = {
+          email: user.email,
+          CampFees: totalPrice,
+          transactionId: paymentIntent.id,
+          date: new Date(), // utc date convert. use moment js to
+          campIds: participator.map((item) => item._id),
+          registeredCampIds: participator.map((item) => item.CampId),
+          status: "pending",
+        };
 
-    //     const res = await axiosSecure.post("/payments", payment);
-    //     console.log("payment saved", res.data);
-    //     refetch();
-    //     if (res.data?.paymentResult?.insertedId) {
-    //       Swal.fire({
-    //         position: "top-end",
-    //         icon: "success",
-    //         title: "Thank you for the taka paisa",
-    //         showConfirmButton: false,
-    //         timer: 1500,
-    //       });
-    //       navigate("/dashboard/paymentHistory");
-    //     }
-    //   }
-    // }
+        const res = await axiosPublic.post("/payments", payment);
+        console.log("payment saved", res.data);
+        refetch();
+        if (res.data?.paymentResult?.insertedId) {
+          Swal.fire({
+            position: "bottom-end",
+            icon: "success",
+            title: "'Payment Received', Thank you for Joining us",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          // navigate("/dashboard/paymentHistory");
+        }
+      }
+    }
   };
   return (
     <form onSubmit={handleSubmit}>

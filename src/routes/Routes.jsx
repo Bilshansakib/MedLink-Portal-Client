@@ -15,6 +15,7 @@ import CampDetails from "../pages/Home/CampDetails/CampDetails";
 import YourProfile from "../pages/Dashboard/YourProfile/YourProfile";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import YourCamps from "../pages/Dashboard/YourCamps/YourCamps";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -109,6 +110,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <YourCamps></YourCamps>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "paymentHistory",
+        element: (
+          <PrivateRoute>
+            <PaymentHistory></PaymentHistory>
           </PrivateRoute>
         ),
       },

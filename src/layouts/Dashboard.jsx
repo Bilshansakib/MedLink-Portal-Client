@@ -205,7 +205,7 @@ const Dashboard = () => {
                             <SiFampay />
                           </div>
 
-                          <NavLink to="/dashboard/payment">
+                          <NavLink to="/dashboard/paymentHistory">
                             User Payment history
                           </NavLink>
                         </div>

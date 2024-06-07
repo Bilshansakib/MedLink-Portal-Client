@@ -57,6 +57,7 @@ const UserRegisterModal = ({ data, handleOpen }) => {
         email: user?.email,
         name: user?.displayName,
         photo: user?.photoURL,
+        status: "pending",
       },
       Participant_Count: 0,
     };
@@ -68,7 +69,7 @@ const UserRegisterModal = ({ data, handleOpen }) => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: ` Thanks For Joining Us`,
+          title: ` Thanks For Your Interest, Let"s Pay`,
           showConfirmButton: false,
           timer: 1500,
         });
