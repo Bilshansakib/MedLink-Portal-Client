@@ -22,17 +22,18 @@ const CheckoutForm = () => {
     (total, item) => total + item.CampFees,
     0
   );
-
+  // const { CampName } = participator.map((item) => item._id);
+  const { CampName } = participator;
   useEffect(() => {
     if (totalPrice > 0) {
       axiosSecure
-        .post("/create-payment-intent", { CampFees: totalPrice })
+        .post("/create-payment-intent", { CampFees: totalPrice, CampName })
         .then((res) => {
           console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
-  }, [axiosSecure, totalPrice]);
+  }, [axiosSecure, totalPrice, CampName]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -82,6 +83,7 @@ const CheckoutForm = () => {
 
         // now save the payment in the database
         const payment = {
+          CampName: CampName,
           email: user.email,
           CampFees: totalPrice,
           transactionId: paymentIntent.id,
@@ -102,7 +104,7 @@ const CheckoutForm = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          // navigate("/dashboard/paymentHistory");
+          navigate("/dashboard/paymentHistory");
         }
       }
     }

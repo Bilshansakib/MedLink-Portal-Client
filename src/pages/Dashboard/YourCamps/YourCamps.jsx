@@ -20,6 +20,8 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { axiosSecure } from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 const TABLE_HEAD = [
   "Image",
   "Camp Name",
@@ -37,6 +39,7 @@ const YourCamps = () => {
   const participatorName = participator[0]?.Participator?.name;
 
   const {
+    _id,
     CampName,
     Image,
     CampFees,
@@ -46,11 +49,35 @@ const YourCamps = () => {
     ParticipantCount,
     Description,
   } = participator;
-  console.log(participator);
+  console.log(_id);
   const totalPrice = participator.reduce(
     (total, item) => total + item.CampFees,
     0
   );
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/registered/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -71,7 +98,7 @@ const YourCamps = () => {
           </button>
         )}
       </div>
-      <Card className="h-full w-full">
+      <Card className="h-full w-full overflow-scroll-x">
         <CardBody>
           <table className="w-full min-w-max table-auto text-left">
             <thead>
@@ -84,7 +111,7 @@ const YourCamps = () => {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none opacity-70"
+                      className="font-normal text-lg leading-none opacity-70"
                     >
                       {head}
                     </Typography>
@@ -96,6 +123,7 @@ const YourCamps = () => {
               {participator.map(
                 (
                   {
+                    _id,
                     Image,
                     CampName,
 
@@ -114,22 +142,15 @@ const YourCamps = () => {
                     : "p-4 border-b border-blue-gray-50";
 
                   return (
-                    <tr key={name}>
+                    <tr key={_id}>
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Avatar
                             src={Image}
-                            alt={name}
+                            alt={index}
                             size="md"
                             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
                           />
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-bold"
-                          >
-                            {name}
-                          </Typography>
                         </div>
                       </td>
                       <td className={classes}>
@@ -184,7 +205,9 @@ const YourCamps = () => {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          Feedback
+                          <button onClick={() => handleDelete(_id)}>
+                            Cancel
+                          </button>
                         </Typography>
                       </td>
                       {/* <td className={classes}>
@@ -222,9 +245,7 @@ const YourCamps = () => {
                       </td> */}
                       <td className={classes}>
                         <Tooltip content="Edit User">
-                          <IconButton variant="text">
-                            <PencilIcon className="h-4 w-4" />
-                          </IconButton>
+                          <IconButton variant="text">Feedback</IconButton>
                         </Tooltip>
                       </td>
                     </tr>
