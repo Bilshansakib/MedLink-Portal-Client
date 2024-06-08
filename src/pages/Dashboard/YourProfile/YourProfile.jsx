@@ -1,17 +1,28 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useParticipate from "../../../hooks/useParticipate";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Image, Space } from "antd";
 import { axiosSecure } from "./../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
-
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Tooltip,
+  Typography,
+} from "@material-tailwind/react";
 const YourProfile = () => {
-  const { logOut } = useAuth();
+  const { user, logOut } = useAuth();
   const [participator, refetch] = useParticipate();
-
-  const participate = participator[0]?.Participator;
-  console.log(participator[0]?._id);
+  console.log(user);
+  // const profile = participator.map((item) => item.Participator);
+  // const name = profile.map((item) => item.email === user.email);
+  // console.log(name);
+  // const participate = participator[0]?.Participator;
+  // console.log(participator[0]?._id);
+  // console.log(participator.map((item) => item.Participator));
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -38,30 +49,80 @@ const YourProfile = () => {
     });
   };
   return (
-    <div>
+    <div className="h-screen">
       <SectionTitle
         heading={"Your Profile"}
         subHeading={"Edit Your Profile"}
       ></SectionTitle>
-      <div className="w-full bg-blue-gray-50 p-8 sm:flex sm:space-x-6 dark:bg-gray-50 dark:text-gray-800">
+
+      <div className="w-full  bg-blue-gray-50 p-8 sm:flex sm:space-x-6 dark:bg-gray-50 dark:text-gray-800">
         <div className=" flex justify-between gap-4 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
-          <div className="">
-            <Space size={12}>
-              <Image
-                width={200}
-                src={participate?.photo}
-                placeholder={
-                  <Image preview={false} src={participate?.photo} width={200} />
-                }
+          <Card className="w-96">
+            <CardHeader floated={false} className="h-80">
+              <img
+                src="https://docs.material-tailwind.com/img/team-3.jpg"
+                alt="profile-picture"
               />
-            </Space>
-          </div>
-          <div className=" space-y-4">
+            </CardHeader>
+            <CardBody className="text-center">
+              <Typography variant="h4" color="blue-gray" className="mb-2">
+                {user.displayName}
+              </Typography>
+              <Typography
+                color="blue-gray"
+                className="font-medium"
+                textGradient
+              >
+                {"role"}
+              </Typography>
+              <Typography
+                color="blue-gray"
+                className="font-medium"
+                textGradient
+              >
+                {user.email}
+              </Typography>
+            </CardBody>
+            <CardFooter className="flex justify-center gap-7 pt-2">
+              <Tooltip content="Like">
+                <Typography
+                  as="a"
+                  href="#facebook"
+                  variant="lead"
+                  color="blue"
+                  textGradient
+                >
+                  <i className="fab fa-facebook" />
+                </Typography>
+              </Tooltip>
+              <Tooltip content="Follow">
+                <Typography
+                  as="a"
+                  href="#twitter"
+                  variant="lead"
+                  color="light-blue"
+                  textGradient
+                >
+                  <i className="fab fa-twitter" />
+                </Typography>
+              </Tooltip>
+              <Tooltip content="Follow">
+                <Typography
+                  as="a"
+                  href="#instagram"
+                  variant="lead"
+                  color="purple"
+                  textGradient
+                >
+                  <i className="fab fa-instagram" />
+                </Typography>
+              </Tooltip>
+            </CardFooter>
+          </Card>
+          {/* <div className=" space-y-4">
             <div>
-              <h2 className="text-2xl font-semibold">{participate?.name}</h2>
-              <span className="text-sm dark:text-gray-600">
-                {participator[0]?.Occupation}
-              </span>
+              <h2 className="text-2xl font-semibold">{user.displayName}</h2>
+              <span className="text-sm dark:text-gray-600">{`hi`}</span>
             </div>
             <div className="space-y-1">
               <span className="flex items-center space-x-2">
@@ -76,7 +137,7 @@ const YourProfile = () => {
                     d="M274.6,25.623a32.006,32.006,0,0,0-37.2,0L16,183.766V496H496V183.766ZM464,402.693,339.97,322.96,464,226.492ZM256,51.662,454.429,193.4,311.434,304.615,256,268.979l-55.434,35.636L57.571,193.4ZM48,226.492,172.03,322.96,48,402.693ZM464,464H48V440.735L256,307.021,464,440.735Z"
                   ></path>
                 </svg>
-                <span className="dark:text-gray-600">{participate?.email}</span>
+                <span className="dark:text-gray-600">{user?.email}</span>
               </span>
               <span className="flex items-center space-x-2">
                 <svg
@@ -95,14 +156,11 @@ const YourProfile = () => {
                 </span>
               </span>
             </div>
-          </div>
+          </div> */}
           <div className=" flex text-center gap-2 justify-center items-center flex-col">
             {/* todo: edit */}
             <Button size="sm">Edit</Button>
-            <Button
-              onClick={() => handleDelete(participator[0]?._id)}
-              size="sm"
-            >
+            <Button onClick={() => handleDelete(user?._id)} size="sm">
               Delete Profile
             </Button>
           </div>

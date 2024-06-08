@@ -16,6 +16,9 @@ import YourProfile from "../pages/Dashboard/YourProfile/YourProfile";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import YourCamps from "../pages/Dashboard/YourCamps/YourCamps";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfile";
+import ManageRegisteredCamps from "../pages/Dashboard/ManageRegisteredCamps/ManageRegisteredCamps";
+import Analytics from "../pages/Dashboard/Analytics/Analytics";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -76,6 +79,15 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:9000/camps/${params.id}`),
       },
       {
+        index: true,
+        path: "organizerProfile",
+        element: (
+          <PrivateRoute>
+            <OrganizerProfile></OrganizerProfile>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "manageUserCamps",
         element: (
           <AdminRoute>
@@ -91,12 +103,28 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      {
+        path: "manage-registered-camps",
+        element: (
+          <AdminRoute>
+            <ManageRegisteredCamps></ManageRegisteredCamps>
+          </AdminRoute>
+        ),
+      },
       // user routes
       {
         path: "userProfile",
         element: (
           <PrivateRoute>
             <YourProfile></YourProfile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "analytics",
+        element: (
+          <PrivateRoute>
+            <Analytics></Analytics>
           </PrivateRoute>
         ),
       },

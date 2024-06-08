@@ -38,7 +38,7 @@ const UpdateData = () => {
     if (res.data.success) {
       const campData = {
         CampName: data.CampName,
-        Image: res.data.data.display_url,
+        Image: res.data?.data?.display_url,
         CampFees: parseFloat(data.CampFees),
         DateTime: data.DateTime,
 
@@ -48,7 +48,7 @@ const UpdateData = () => {
         Location: data.Location,
       };
       //   update
-      const campsResponse = await axiosSecure.patch(`/camps/${_id}`, campData);
+      const campsResponse = await axiosSecure.put(`/camps/${_id}`, campData);
       console.log(campsResponse.data);
       if (campsResponse.data.modifiedCount > 0) {
         Swal.fire({
