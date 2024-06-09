@@ -43,9 +43,10 @@ const UpdateData = () => {
         DateTime: data.DateTime,
 
         HealthcareProfessional: data.HealthcareProfessional,
-        ParticipantCount: data.ParticipantCount,
+        ParticipantCount: parseFloat(data.ParticipantCount),
         Description: data.Description,
         Location: data.Location,
+        Participant_Count: 0,
       };
       //   update
       const campsResponse = await axiosSecure.put(`/camps/${_id}`, campData);

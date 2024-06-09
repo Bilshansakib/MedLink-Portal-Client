@@ -15,10 +15,13 @@ const PaymentHistory = () => {
       return res.data;
     },
   });
-  const { CampFees, transactionId, status } = payments;
+  console.log(payments);
+  const CampName = payments[0]?.CampName[0];
   const TABLE_HEAD = [
+    "No.",
     "Camp Name",
     "Fees",
+    "Transaction ID",
     "Payment Status",
     "Confirmation Status",
   ];
@@ -36,7 +39,7 @@ const PaymentHistory = () => {
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                  className="border-b text-center border-blue-gray-100 bg-blue-gray-50 p-4"
                 >
                   <Typography
                     variant="small"
@@ -50,27 +53,45 @@ const PaymentHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {payments.map(({ CampFees, transactionId }, index) => {
+            {payments.map(({ CampFees, transactionId, status }, index) => {
               const isLast = index === payments.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
 
               return (
-                <tr key={name}>
+                <tr key={name} className="text-center">
                   <td className={classes}>
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blue"
                       className="font-normal"
                     >
-                      {CampFees}
+                      {index + 1}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue"
+                      className="font-normal"
+                    >
+                      {CampName}
                     </Typography>
                   </td>
                   <td className={`${classes} bg-blue-gray-50/50`}>
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blue"
+                      className="font-normal"
+                    >
+                      {CampFees}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue"
                       className="font-normal"
                     >
                       {status}
@@ -79,21 +100,20 @@ const PaymentHistory = () => {
                   <td className={classes}>
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blue"
+                      className="font-normal"
+                    >
+                      {" "}
+                      {status}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue"
                       className="font-normal"
                     >
                       {transactionId}
-                    </Typography>
-                  </td>
-                  <td className={`${classes} bg-blue-gray-50/50`}>
-                    <Typography
-                      as="a"
-                      href="#"
-                      variant="small"
-                      color="blue-gray"
-                      className="font-medium"
-                    >
-                      Edit
                     </Typography>
                   </td>
                 </tr>

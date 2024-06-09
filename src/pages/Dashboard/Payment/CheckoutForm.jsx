@@ -83,11 +83,11 @@ const CheckoutForm = () => {
 
         // now save the payment in the database
         const payment = {
-          CampName: CampName,
+          CampName: participator.map((item) => item.CampName),
           email: user.email,
           CampFees: totalPrice,
           transactionId: paymentIntent.id,
-          date: new Date(), // utc date convert. use moment js to
+          date: new Date().toDateString(), // utc date convert. use moment js to
           campIds: participator.map((item) => item._id),
           registeredCampIds: participator.map((item) => item.CampId),
           status: "pending",

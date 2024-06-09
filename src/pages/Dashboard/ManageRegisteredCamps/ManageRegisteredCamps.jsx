@@ -1,6 +1,5 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import useAuth from "../../../hooks/useAuth";
-import useParticipator from "../../../hooks/useParticipator";
+
 import {
   Card,
   Typography,
@@ -8,10 +7,10 @@ import {
   CardBody,
   Chip,
   Avatar,
-  Tooltip,
-  Input,
 } from "@material-tailwind/react";
 import usePaymentStatus from "../../../hooks/usePaymentStatus";
+import Swal from "sweetalert2";
+import { axiosSecure } from "../../../hooks/useAxiosSecure";
 
 const TABLE_HEAD = [
   "Image",
@@ -31,8 +30,50 @@ const ManageRegisteredCamps = () => {
   // const participateName = participator.map((item) => item.Participator?.name);
   // const paymentStatus = participator.map((item) => item.Participator?.status);
   // console.log(participator);
-  const [paidUser] = usePaymentStatus();
-  console.log("get data", paidUser);
+  const [paidUser, refetch] = usePaymentStatus();
+  console.log("get data", paidUser.email);
+
+  const handleConfirmation = (id) => {
+    axiosSecure.patch(`/paidUser/status/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Great, You Have Confirmed The Participator's Payment`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
+  const handleCancelUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/paidUser/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: `Successfully Cancel...`,
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <SectionTitle
@@ -142,7 +183,9 @@ const ManageRegisteredCamps = () => {
                           </div>
                         </td>
                         <td className={classes}>
-                          <Button variant="text">{status}</Button>
+                          <button onClick={() => handleConfirmation(_id)}>
+                            {status}
+                          </button>
                         </td>
                         <td className={classes}>
                           <Typography
@@ -150,46 +193,11 @@ const ManageRegisteredCamps = () => {
                             color="blue-gray"
                             className="font-normal text-center"
                           >
-                            <button
-                            // onClick={() => handleDelete(_id)}
-                            >
+                            <button onClick={() => handleCancelUser(_id)}>
                               Cancel
                             </button>
                           </Typography>
                         </td>
-                        {/* <td className={classes}>
-                        <div className="flex items-center gap-3">
-                          <div className="h-9 w-12 rounded-md border border-blue-gray-50 p-1">
-                            <Avatar
-                              src={
-                                CampFees === "visa"
-                                  ? "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
-                                  : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
-                              }
-                              size="sm"
-                              alt={CampFees}
-                              variant="square"
-                              className="h-full w-full object-contain p-1"
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal capitalize"
-                            >
-                              {CampFees.split("-").join(" ")}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal opacity-70"
-                            >
-                              {expiry}
-                            </Typography>
-                          </div>
-                        </div>
-                      </td> */}
                       </tr>
                     );
                   }

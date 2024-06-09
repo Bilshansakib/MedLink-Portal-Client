@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import useUsers from "../../../hooks/useUsers";
 import { FaUser } from "react-icons/fa6";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import usePaymentStatus from "../../../hooks/usePaymentStatus";
 
 const ManageUserCamps = () => {
   const axiosSecure = useAxiosSecure();

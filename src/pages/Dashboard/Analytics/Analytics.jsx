@@ -162,24 +162,24 @@ const Analytics = () => {
               color="transparent"
               className="flex flex-col gap-4 rounded-none md:flex-row md:items-center"
             >
-              <div className="w-max rounded-lg bg-gray-900 p-5 text-white">
+              <div className="w-max rounded-lg bg-blue-200 p-5 text-white">
                 <Square3Stack3DIcon className="h-6 w-6" />
               </div>
               <div>
-                <Typography variant="h6" color="blue-gray">
-                  Line Chart
+                <Typography variant="h6" color="blue">
+                  Your Camp Chart
                 </Typography>
                 <Typography
                   variant="small"
-                  color="gray"
+                  color="blue-gray"
                   className="max-w-sm font-normal"
                 >
-                  Visualize your data in a simple way using the
-                  @material-tailwind/react chart plugin.
+                  Here you can see our camp/fees : Visualize your data in a
+                  simple way using the
                 </Typography>
               </div>
             </CardHeader>
-            <CardBody className="px-2 pb-0">
+            <CardBody className="px-2 pb-0 text-blue-gray-100">
               <Chart {...chartConfig} />
             </CardBody>
           </Card>
@@ -221,7 +221,7 @@ const Analytics = () => {
               labelLine={false}
               label={renderCustomizedLabel}
               outerRadius={80}
-              fill="#8884d8"
+              fill="#85AFD9"
               dataKey="value"
             >
               {pieChartData.map((entry, index) => (

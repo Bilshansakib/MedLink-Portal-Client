@@ -1,23 +1,15 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import useParticipate from "../../../hooks/useParticipate";
 import useParticipator from "../../../hooks/useParticipator";
-import { PencilIcon } from "@heroicons/react/24/solid";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+
 import {
   Card,
-  CardHeader,
   Typography,
   Button,
   CardBody,
   Chip,
-  CardFooter,
   Avatar,
   IconButton,
   Tooltip,
-  Input,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { axiosSecure } from "../../../hooks/useAxiosSecure";
@@ -35,8 +27,9 @@ const TABLE_HEAD = [
 const YourCamps = () => {
   //   const [participator, refetch] = useParticipate();
   const [participator, refetch] = useParticipator();
-
+  console.log(participator);
   const participatorName = participator[0]?.Participator?.name;
+  const paymentStatus = participator[0]?.Participator?.status;
 
   const {
     _id,
@@ -86,7 +79,7 @@ const YourCamps = () => {
         subHeading={"Get All Your Registered Camps Here"}
       ></SectionTitle>
       <div className="flex justify-evenly mb-8 ">
-        <h2 className="text-4xl">Items: {participator.length}</h2>
+        <h2 className="text-4xl">Camp Join: {participator.length}</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
         {participator.length ? (
           <Link to="/dashboard/payment">
@@ -185,11 +178,11 @@ const YourCamps = () => {
                           <Chip
                             size="sm"
                             variant="ghost"
-                            value={status}
+                            value={paymentStatus}
                             color={
-                              status === "paid"
+                              paymentStatus === "paid"
                                 ? "green"
-                                : status === "pending"
+                                : paymentStatus === "pending"
                                 ? "amber"
                                 : "red"
                             }
@@ -197,8 +190,22 @@ const YourCamps = () => {
                         </div>
                       </td>
                       <td className={classes}>
-                        <Button variant="text">Paid</Button>
+                        <div className="w-max">
+                          <Chip
+                            size="sm"
+                            variant="ghost"
+                            value={paymentStatus}
+                            color={
+                              paymentStatus === "paid"
+                                ? "green"
+                                : paymentStatus === "pending"
+                                ? "amber"
+                                : "red"
+                            }
+                          />
+                        </div>
                       </td>
+
                       <td className={classes}>
                         <Typography
                           variant="small"
@@ -243,11 +250,28 @@ const YourCamps = () => {
                           </div>
                         </div>
                       </td> */}
-                      <td className={classes}>
-                        <Tooltip content="Edit User">
-                          <IconButton variant="text">Feedback</IconButton>
-                        </Tooltip>
-                      </td>
+                      {!paymentStatus ? (
+                        <>
+                          {" "}
+                          <td className={classes}>
+                            <Tooltip content="Edit User">
+                              <IconButton variant="text">Feedback</IconButton>
+                            </Tooltip>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td className={classes}>
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-normal"
+                            >
+                              N/A
+                            </Typography>
+                          </td>
+                        </>
+                      )}
                     </tr>
                   );
                 }
