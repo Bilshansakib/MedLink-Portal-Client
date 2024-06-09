@@ -12,7 +12,7 @@ const Payment = () => {
         heading={"Payment"}
         subHeading={"Complete Your Payment Here"}
       ></SectionTitle>
-      <div>
+      <div className="bg-amber-50 p-20 rounded-2xl">
         <Elements stripe={stripePromise}>
           <CheckoutForm></CheckoutForm>
         </Elements>

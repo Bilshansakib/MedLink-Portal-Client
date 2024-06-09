@@ -80,12 +80,12 @@ const YourCamps = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen">
       <SectionTitle
         heading={"Your Registered Camps "}
         subHeading={"Get All Your Registered Camps Here"}
       ></SectionTitle>
-      <div className="flex justify-evenly mb-8">
+      <div className="flex justify-evenly mb-8 ">
         <h2 className="text-4xl">Items: {participator.length}</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
         {participator.length ? (
@@ -100,7 +100,7 @@ const YourCamps = () => {
       </div>
       <Card className="h-full w-full overflow-scroll-x">
         <CardBody>
-          <table className="w-full min-w-max table-auto text-left">
+          <table className="w-full table-auto text-left">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head) => (

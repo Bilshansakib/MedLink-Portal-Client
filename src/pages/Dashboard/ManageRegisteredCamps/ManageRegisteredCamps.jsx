@@ -1,18 +1,17 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAuth from "../../../hooks/useAuth";
 import useParticipator from "../../../hooks/useParticipator";
 import {
   Card,
-  CardHeader,
   Typography,
   Button,
   CardBody,
   Chip,
-  CardFooter,
   Avatar,
-  IconButton,
   Tooltip,
   Input,
 } from "@material-tailwind/react";
+import usePaymentStatus from "../../../hooks/usePaymentStatus";
 
 const TABLE_HEAD = [
   "Image",
@@ -26,10 +25,14 @@ const TABLE_HEAD = [
 ];
 
 const ManageRegisteredCamps = () => {
-  const [participator] = useParticipator();
-  console.log(participator.map((item) => item.Participator?.name));
-  const ParticipateName = participator.map((item) => item.Participator?.name);
+  // const { user } = useAuth;
+  // const [participator] = useParticipator();
 
+  // const participateName = participator.map((item) => item.Participator?.name);
+  // const paymentStatus = participator.map((item) => item.Participator?.status);
+  // console.log(participator);
+  const [paidUser] = usePaymentStatus();
+  console.log("get data", paidUser);
   return (
     <div>
       <SectionTitle
@@ -37,7 +40,7 @@ const ManageRegisteredCamps = () => {
         heading={"Manage Your Registered Camps"}
       ></SectionTitle>
       <div>
-        <Card className="h-screen overflow-scroll-x">
+        <Card className="h-screen overflow-scroll">
           <CardBody>
             <table className=" table-auto text-start">
               <thead>
@@ -59,7 +62,7 @@ const ManageRegisteredCamps = () => {
                 </tr>
               </thead>
               <tbody className="w-full border-2">
-                {participator.map(
+                {paidUser.map(
                   (
                     {
                       _id,
@@ -67,6 +70,8 @@ const ManageRegisteredCamps = () => {
                       CampName,
 
                       CampFees,
+                      status,
+                      email,
                       DateTime,
                       Location,
                       HealthcareProfessional,
@@ -75,7 +80,7 @@ const ManageRegisteredCamps = () => {
                     },
                     index
                   ) => {
-                    const isLast = index === participator.length - 1;
+                    const isLast = index === paidUser.length - 1;
                     const classes = isLast
                       ? "p-4"
                       : "p-4 border-b border-blue-gray-50";
@@ -98,7 +103,7 @@ const ManageRegisteredCamps = () => {
                             color="blue-gray"
                             className="font-normal text-center"
                           >
-                            {ParticipateName}
+                            {email}
                           </Typography>
                         </td>
                         <td className={classes}>
@@ -137,7 +142,7 @@ const ManageRegisteredCamps = () => {
                           </div>
                         </td>
                         <td className={classes}>
-                          <Button variant="text">Paid</Button>
+                          <Button variant="text">{status}</Button>
                         </td>
                         <td className={classes}>
                           <Typography

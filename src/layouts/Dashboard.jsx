@@ -9,7 +9,7 @@ import useUsers from "../hooks/useUsers";
 import useAdmin from "../hooks/useAdmin";
 import useParticipator from "../hooks/useParticipator";
 import useAuth from "../hooks/useAuth";
-
+import logo from "../../public/logo1.png";
 const Dashboard = () => {
   const { logOut } = useAuth();
   const [camp] = useCamp();
@@ -20,13 +20,9 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto">
       <div className="flex">
-        <div className="relative min-h-screen w-full max-w-[18rem] flex-col rounded-xl bg-blue-200 bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
+        <div className="relative min-h-screen w-full max-w-[18rem] flex-col rounded-bl-xl rounded-tl-xl bg-blue-200 bg-clip-border p-4 text-gray-700 shadow-2xl shadow-blue-gray-900/5">
           <div className="flex items-center gap-4 p-4 mb-2">
-            <img
-              src="https://docs.material-tailwind.com/img/logo-ct-dark.png"
-              alt="brand"
-              className="w-8 h-8"
-            />
+            <img src={logo} alt="brand" className="w-16 h-16" />
             <h5 className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
               MedLink Portal
             </h5>
@@ -404,7 +400,7 @@ const Dashboard = () => {
           </nav>
         </div>
 
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 rounded-br-xl rounded-tr-xl bg-blue-200">
           <Outlet></Outlet>
         </div>
       </div>

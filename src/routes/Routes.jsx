@@ -64,6 +64,15 @@ export const router = createBrowserRouter([
     children: [
       // for admin
       {
+        index: true,
+        path: "organizerProfile",
+        element: (
+          <PrivateRoute>
+            <OrganizerProfile></OrganizerProfile>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "manageCamps",
         element: <ManageCamps></ManageCamps>,
       },
@@ -78,15 +87,7 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:9000/camps/${params.id}`),
       },
-      {
-        index: true,
-        path: "organizerProfile",
-        element: (
-          <PrivateRoute>
-            <OrganizerProfile></OrganizerProfile>
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "manageUserCamps",
         element: (

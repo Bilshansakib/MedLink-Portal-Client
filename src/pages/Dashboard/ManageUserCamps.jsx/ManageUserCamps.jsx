@@ -5,18 +5,20 @@ import { TbHttpDelete } from "react-icons/tb";
 import Swal from "sweetalert2";
 import useUsers from "../../../hooks/useUsers";
 import { FaUser } from "react-icons/fa6";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import usePaymentStatus from "../../../hooks/usePaymentStatus";
 
 const ManageUserCamps = () => {
   const axiosSecure = useAxiosSecure();
   const [users, refetch] = useUsers();
 
-  //   const { data: users = [], refetch } = useQuery({
-  //     queryKey: ["users"],
-  //     queryFn: async () => {
-  //       const res = await axiosSecure.get(`/users`);
-  //       return res.data;
-  //     },
-  //   });
+  // const { data: users = [], refetch } = useQuery({
+  //   queryKey: ["users"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/users`);
+  //     return res.data;
+  //   },
+  // });
   const handleMakeAdmin = (user) => {
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
       console.log(res.data);
@@ -69,6 +71,10 @@ const ManageUserCamps = () => {
   ];
   return (
     <div>
+      <SectionTitle
+        heading={"Participators"}
+        subHeading={"Manage Participators  Of Your Websites"}
+      ></SectionTitle>
       <div>
         <h2>Manage Registered Camps of (User ({users.length}))</h2>
       </div>

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Button, Drawer, Space } from "antd";
 import { AuthContext } from "../../providers/AuthProvider";
 import { NavLink } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 const NavViewProfile = () => {
   const { user, logOut, loading } = useContext(AuthContext);
 
@@ -11,10 +12,7 @@ const NavViewProfile = () => {
     setSize("default");
     setOpen(true);
   };
-  const showLargeDrawer = () => {
-    setSize("large");
-    setOpen(true);
-  };
+
   const onClose = () => {
     setOpen(false);
   };
@@ -23,11 +21,17 @@ const NavViewProfile = () => {
     <>
       <Space>
         <Button
-          //   type="primary"
+          type="primary"
+          className="flex justify-center items-center gap-2"
           onClick={showDefaultDrawer}
         >
-          View Profile (378px)
+          <span>
+            {" "}
+            <CgProfile />
+          </span>{" "}
+          View Profile
         </Button>
+
         {/* <Button type="primary" onClick={showLargeDrawer}>
           Open Large Size (736px)
         </Button> */}
@@ -50,8 +54,6 @@ const NavViewProfile = () => {
         <ul>
           <li>{user ? <NavLink to="dashboard">Dashboard</NavLink> : ""}</li>
         </ul>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
       </Drawer>
     </>
   );
