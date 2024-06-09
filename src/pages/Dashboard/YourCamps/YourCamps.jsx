@@ -41,8 +41,11 @@ const YourCamps = () => {
     HealthcareProfessional,
     ParticipantCount,
     Description,
+    status,
   } = participator;
-  console.log(_id);
+
+  console.log(status);
+  console.log(participator);
   const totalPrice = participator.reduce(
     (total, item) => total + item.CampFees,
     0
@@ -119,7 +122,7 @@ const YourCamps = () => {
                     _id,
                     Image,
                     CampName,
-
+                    status,
                     CampFees,
                     DateTime,
                     Location,
@@ -178,11 +181,11 @@ const YourCamps = () => {
                           <Chip
                             size="sm"
                             variant="ghost"
-                            value={paymentStatus}
+                            value={status}
                             color={
-                              paymentStatus === "paid"
+                              status === "confirmed"
                                 ? "green"
-                                : paymentStatus === "pending"
+                                : status === "pending"
                                 ? "amber"
                                 : "red"
                             }

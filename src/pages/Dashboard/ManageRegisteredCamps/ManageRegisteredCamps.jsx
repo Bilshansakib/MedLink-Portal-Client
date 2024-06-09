@@ -7,10 +7,15 @@ import {
   CardBody,
   Chip,
   Avatar,
+  Tooltip,
 } from "@material-tailwind/react";
 import usePaymentStatus from "../../../hooks/usePaymentStatus";
 import Swal from "sweetalert2";
 import { axiosSecure } from "../../../hooks/useAxiosSecure";
+import { GiConfirmed } from "react-icons/gi";
+import { ImCancelCircle } from "react-icons/im";
+import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import { MdOutlineQuestionMark } from "react-icons/md";
 
 const TABLE_HEAD = [
   "Image",
@@ -89,7 +94,7 @@ const ManageRegisteredCamps = () => {
                   {TABLE_HEAD.map((head) => (
                     <th
                       key={head}
-                      className="border-y w-full text-2xl  border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                      className="border-y w-full text-2xl border-blue-gray-100 bg-blue-gray-50/50 p-4"
                     >
                       <Typography
                         variant="small"
@@ -113,18 +118,13 @@ const ManageRegisteredCamps = () => {
                       CampFees,
                       status,
                       email,
-                      DateTime,
-                      Location,
-                      HealthcareProfessional,
-                      ParticipantCount,
-                      Description,
                     },
                     index
                   ) => {
                     const isLast = index === paidUser.length - 1;
                     const classes = isLast
                       ? "p-4"
-                      : "p-4 border-b border-blue-gray-50";
+                      : "p-4 border-b border-blue-gray-50 text-center";
 
                     return (
                       <tr key={_id}>
@@ -173,7 +173,7 @@ const ManageRegisteredCamps = () => {
                               variant="ghost"
                               value={status}
                               color={
-                                status === "paid"
+                                status === "confirmed"
                                   ? "green"
                                   : status === "pending"
                                   ? "amber"
@@ -183,8 +183,12 @@ const ManageRegisteredCamps = () => {
                           </div>
                         </td>
                         <td className={classes}>
-                          <button onClick={() => handleConfirmation(_id)}>
-                            {status}
+                          <button
+                            className="flex items-center gap-2 text-center"
+                            onClick={() => handleConfirmation(_id)}
+                          >
+                            <IoShieldCheckmarkOutline /> {status}
+                            <MdOutlineQuestionMark />
                           </button>
                         </td>
                         <td className={classes}>
@@ -194,7 +198,15 @@ const ManageRegisteredCamps = () => {
                             className="font-normal text-center"
                           >
                             <button onClick={() => handleCancelUser(_id)}>
-                              Cancel
+                              {status === "confirmed" ? (
+                                <>
+                                  <GiConfirmed />
+                                </>
+                              ) : (
+                                <>
+                                  <ImCancelCircle />
+                                </>
+                              )}
                             </button>
                           </Typography>
                         </td>

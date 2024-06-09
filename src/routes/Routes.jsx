@@ -19,6 +19,7 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfile";
 import ManageRegisteredCamps from "../pages/Dashboard/ManageRegisteredCamps/ManageRegisteredCamps";
 import Analytics from "../pages/Dashboard/Analytics/Analytics";
+import Reviews from "../pages/Reviews/Reviews";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -132,7 +133,11 @@ export const router = createBrowserRouter([
 
       {
         path: "payment",
-        element: <Payment></Payment>,
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
+          </PrivateRoute>
+        ),
       },
       {
         path: "RegCamps",
@@ -147,6 +152,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <PaymentHistory></PaymentHistory>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "reviews",
+        element: (
+          <PrivateRoute>
+            <Reviews></Reviews>
           </PrivateRoute>
         ),
       },

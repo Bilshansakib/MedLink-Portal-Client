@@ -2,7 +2,14 @@ import SectionTitle from "./../../../components/SectionTitle/SectionTitle";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { Card, Typography } from "@material-tailwind/react";
+import {
+  Card,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@material-tailwind/react";
+import { Link } from "react-router-dom";
+import { MdOutlineRateReview } from "react-icons/md";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -21,9 +28,12 @@ const PaymentHistory = () => {
     "No.",
     "Camp Name",
     "Fees",
-    "Transaction ID",
-    "Payment Status",
+
     "Confirmation Status",
+
+    "Payment Status",
+    "Transaction ID",
+    "FeedBack",
   ];
 
   return (
@@ -101,7 +111,7 @@ const PaymentHistory = () => {
                     <Typography
                       variant="small"
                       color="blue"
-                      className="font-normal"
+                      className="font-bold"
                     >
                       {" "}
                       {status}
@@ -116,6 +126,34 @@ const PaymentHistory = () => {
                       {transactionId}
                     </Typography>
                   </td>
+                  {status ? (
+                    <>
+                      {" "}
+                      <Link to="/dashboard/reviews">
+                        <td className={`${classes} `}>
+                          <Typography
+                            variant="small"
+                            color="blue"
+                            className="underline flex gap-2 items-center font-bold"
+                          >
+                            <MdOutlineRateReview /> Reviews
+                          </Typography>
+                        </td>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <td className={classes}>
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal"
+                        >
+                          N/A
+                        </Typography>
+                      </td>
+                    </>
+                  )}
                 </tr>
               );
             })}
