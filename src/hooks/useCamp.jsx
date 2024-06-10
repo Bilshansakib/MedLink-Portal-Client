@@ -1,7 +1,7 @@
 import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
-const useCamp = () => {
+const useCamp = (asc) => {
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -10,14 +10,15 @@ const useCamp = () => {
     isPending,
   } = useQuery({
     queryKey: ["camps"],
+    asc,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/camps`);
+      const res = await axiosSecure.get(`/camps?sort=${asc ? "asc" : "desc"}`);
       return res.data;
     },
   });
   return [camp, refetch, isPending];
   // useEffect(() => {
-  //   fetch("http://localhost:9000/camps")
+  //   fetch("https://project-finale-server.vercel.app/camps")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setCamp(data);

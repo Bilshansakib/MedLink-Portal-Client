@@ -1,9 +1,6 @@
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import { Avatar, Card } from "antd";
+import { EllipsisOutlined } from "@ant-design/icons";
+import { Avatar, Card, Space } from "antd";
+import { CiLocationOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
 const { Meta } = Card;
 
@@ -22,11 +19,21 @@ const AllAvailableCard = ({ card }) => {
   return (
     <>
       <Link to={`campDetails/${_id}`}>
-        <div className="mx-auto gap-4">
+        <div className="mx-auto gap-4 ">
+          {/* <Card>
+            <Space size={12}>
+              <Image
+                width={200}
+                src={Image}
+                placeholder={<Image preview={false} src={Image} width={200} />}
+              />
+            </Space>
+          </Card> */}
+
           <Card
             style={{
               width: 360,
-              marginTop: 16,
+              marginTop: 30,
             }}
           >
             <Meta
@@ -35,27 +42,46 @@ const AllAvailableCard = ({ card }) => {
                   src={`https://api.dicebear.com/7.x/miniavs/svg?seed=1`}
                 />
               }
-              title={CampName}
+              title={HealthcareProfessional}
               description={Description}
             />
+
+            <div className="flex">
+              <Meta
+                className="p-4"
+                title={"Camp Name"}
+                description={`${CampName}`}
+              />
+              <Meta
+                className="p-4"
+                title={"Camp Fees"}
+                description={`$${CampFees}`}
+              />
+              <Meta
+                className="p-4"
+                title={"Date & Time"}
+                description={`${DateTime}`}
+              />
+            </div>
           </Card>
           <Card
             style={{
               width: 360,
-              marginTop: 2,
+              marginTop: -16,
             }}
             actions={[
-              <SettingOutlined key="setting" />,
-              <EditOutlined key="edit" />,
+              <CiLocationOn key="location" className="ml-8" />,
+
+              <Meta key={Location} description={`${Location}`} />,
 
               <EllipsisOutlined key="ellipsis" />,
             ]}
           >
-            <Meta
-              avatar={<Avatar src={Image} />}
-              title="Card title"
-              description="This is the description"
-            />
+            <div className="avatar">
+              <div className="w-full mask mask-hexagon">
+                <img src={Image} />
+              </div>
+            </div>
           </Card>
         </div>
       </Link>

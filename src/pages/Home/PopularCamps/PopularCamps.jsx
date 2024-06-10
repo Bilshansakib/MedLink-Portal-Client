@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import PopularCard from "../../../components/Shared/CampCard/PopularCard";
 import useCamp from "../../../hooks/useCamp";
+import { Button } from "@material-tailwind/react";
 
 const PopularCamps = () => {
   const [camp] = useCamp();
-  const popular = camp.filter((camp) => camp.ParticipantCount > 80);
+  console.log(camp);
+  const popular = camp.filter((card) => card.ParticipantCount > 80);
 
   return (
     <section className="">
@@ -15,7 +18,11 @@ const PopularCamps = () => {
           <PopularCard key={card.CampName} card={card}></PopularCard>
         ))}
       </div>
-      <button>see all camp</button>
+      <div className="flex text-center items-center justify-center mt-8">
+        <Link to="availableCamps">
+          <Button> see more</Button>
+        </Link>
+      </div>
     </section>
   );
 };

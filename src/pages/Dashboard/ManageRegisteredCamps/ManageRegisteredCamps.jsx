@@ -184,11 +184,13 @@ const ManageRegisteredCamps = () => {
                         </td>
                         <td className={classes}>
                           <button
-                            className="flex items-center gap-2 text-center"
+                            className="flex items-center text-center"
                             onClick={() => handleConfirmation(_id)}
                           >
-                            <IoShieldCheckmarkOutline /> {status}
-                            <MdOutlineQuestionMark />
+                            <IoShieldCheckmarkOutline size={24} />{" "}
+                            {status === "confirmed"
+                              ? "Already confirmed"
+                              : "click to 'confirm'"}
                           </button>
                         </td>
                         <td className={classes}>

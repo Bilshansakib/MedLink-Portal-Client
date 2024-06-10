@@ -42,7 +42,7 @@ const PaymentHistory = () => {
         subHeading={"Payment History"}
         heading={"Check Your Past And Current Transactions"}
       ></SectionTitle>
-      <Card className="h-full w-full overflow-scroll">
+      <Card className="h-screen w-full overflow-scroll">
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>

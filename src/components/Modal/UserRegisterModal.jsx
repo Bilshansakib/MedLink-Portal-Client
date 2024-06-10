@@ -22,7 +22,11 @@ import toast from "react-hot-toast";
 
 const UserRegisterModal = ({ data, handleOpen }) => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const axiosPublic = useAxiosPublic();
 
   const todaysDate = new Date().toDateString();
@@ -154,7 +158,7 @@ const UserRegisterModal = ({ data, handleOpen }) => {
                   Camp Fees $
                 </Typography>
                 <Input
-                  {...register("CampFees")}
+                  {...register("CampFees", { pattern: /\d+/ })}
                   defaultValue={CampFees}
                   type="number"
                   min="0"
@@ -165,6 +169,7 @@ const UserRegisterModal = ({ data, handleOpen }) => {
                   }}
                   className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
                 />
+                {errors.CampFees && <p>Please enter number for age.</p>}
               </div>
             </div>
             <div className="mb-6 flex flex-col gap-4 md:flex-row">
@@ -229,7 +234,7 @@ const UserRegisterModal = ({ data, handleOpen }) => {
                   Age
                 </Typography>
                 <select
-                  {...register("age")}
+                  {...register("age", { pattern: /\d+/ })}
                   size="lg"
                   // labelProps={{
                   //   className: "hidden",
@@ -239,6 +244,12 @@ const UserRegisterModal = ({ data, handleOpen }) => {
                   <option disabled value="Age">
                     Age
                   </option>
+                  <option value="10">50</option>
+                  <option value="10">40</option>
+                  <option value="10">30</option>
+                  <option value="10">20</option>
+                  <option value="10">10</option>
+
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -248,7 +259,6 @@ const UserRegisterModal = ({ data, handleOpen }) => {
                   <option value="7">7</option>
                   <option value="8">8</option>
                   <option value="9">9</option>
-                  <option value="10">10</option>
                   <option value="11">11</option>
                   <option value="12">12</option>
                   <option value="13">13</option>

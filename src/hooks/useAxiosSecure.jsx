@@ -4,17 +4,18 @@ import axios from "axios";
 // import { useEffect } from "react";
 
 export const axiosSecure = axios.create({
-  baseURL: "http://localhost:9000",
+  baseURL: "https://project-finale-server.vercel.app",
+  // baseURL: "http://localhost:9000",
 });
 
 const useAxiosSecure = () => {
   // const navigate = useNavigate();
   // const { logOut } = useAuth();
 
-  // request interceptor to add authorization header for every secure call to teh api
+  // request interceptor to add authorization
   axiosSecure.interceptors.request.use(
     function (config) {
-      console.log("dekho di ki somossa");
+      console.log("dekho di eikhane ki somossa");
       const token = localStorage.getItem("access-token");
       // console.log('request stopped by interceptors', token)
       config.headers.authorization = `Bearer ${token}`;

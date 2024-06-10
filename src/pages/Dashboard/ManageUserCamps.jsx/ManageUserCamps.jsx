@@ -63,19 +63,18 @@ const ManageUserCamps = () => {
     "",
     "Name",
     "Healthcare Prof..",
-    "Date & Time",
-    "Location",
+    "Admin Status",
     "Action",
-    "",
+    "Delete",
   ];
   return (
-    <div>
+    <div className="h-screen">
       <SectionTitle
         heading={"Participators"}
-        subHeading={"Manage Participators  Of Your Websites"}
+        subHeading={"Here, You Can Make Someone Admin"}
       ></SectionTitle>
       <div>
-        <h2>Manage Registered Camps of (User ({users.length}))</h2>
+        <h2>Manage Participators Of Your Websites ({users.length})</h2>
       </div>
       <Card className="h-full w-full overflow-scroll">
         <table className="w-full min-w-max table-auto text-left">
@@ -84,12 +83,12 @@ const ManageUserCamps = () => {
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                  className="border-b border-blue-200  bg-blue-gray-50 p-4"
                 >
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal leading-none opacity-70"
+                    className="font-normal text-lg text-center  leading-none opacity-70"
                   >
                     {head}
                   </Typography>
@@ -99,11 +98,11 @@ const ManageUserCamps = () => {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr key={user._id} className="even:bg-blue-gray-50/50">
+              <tr key={user._id} className="even:bg-blue-50/50 text-center">
                 <td className="p-4">
                   <Typography
                     variant="small"
-                    color="blue-gray"
+                    color="blue"
                     className="font-normal"
                   >
                     {index + 1}
@@ -112,7 +111,7 @@ const ManageUserCamps = () => {
                 <td className="p-4">
                   <Typography
                     variant="small"
-                    color="blue-gray"
+                    color="blue"
                     className="font-normal"
                   >
                     {user.name}
@@ -121,19 +120,22 @@ const ManageUserCamps = () => {
                 <td className="p-4">
                   <Typography
                     variant="small"
-                    color="blue-gray"
+                    color="blue"
                     className="font-normal"
                   >
                     {user.email}
                   </Typography>
                 </td>
+
                 <td className="p-4">
                   <Typography
+                    as="a"
+                    href="#"
                     variant="small"
-                    color="blue-gray"
-                    className="font-normal"
+                    color="blue"
+                    className="font-medium bg-blue-50"
                   >
-                    {user.DateTime}
+                    {user.role === "admin" ? "admin" : "user"}
                   </Typography>
                 </td>
                 <td className="p-4">
@@ -141,28 +143,18 @@ const ManageUserCamps = () => {
                     as="a"
                     href="#"
                     variant="small"
-                    color="blue-gray"
-                    className="font-medium"
-                  >
-                    {user.role}
-                  </Typography>
-                </td>
-                <td className="p-4">
-                  <Typography
-                    as="a"
-                    href="#"
-                    variant="small"
-                    color="blue-gray"
-                    className="font-medium"
+                    color="blue"
+                    className="font-medium bg-blue-50 text-center"
                   >
                     {user.role === "admin" ? (
-                      "admin"
+                      "Now Admin"
                     ) : (
                       <Button
                         onClick={() => handleMakeAdmin(user)}
                         variant="text"
+                        className="flex items-center gap-2"
                       >
-                        <FaUser></FaUser>
+                        <FaUser></FaUser> Make Admin
                       </Button>
                     )}
                   </Typography>

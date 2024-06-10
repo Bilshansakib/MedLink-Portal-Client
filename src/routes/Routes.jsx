@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         path: "campDetails/:id",
         element: <CampDetails></CampDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/camps/${params.id}`),
+          fetch(`https://project-finale-server.vercel.app/camps/${params.id}`),
       },
       {
         path: "availableCamps",
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
         path: "availableCamps/campDetails/:id",
         element: <CampDetails></CampDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/camps/${params.id}`),
+          fetch(`https://project-finale-server.vercel.app/camps/${params.id}`),
       },
       {
         path: "login",
@@ -68,14 +68,20 @@ export const router = createBrowserRouter([
         index: true,
         path: "organizerProfile",
         element: (
-          <PrivateRoute>
-            <OrganizerProfile></OrganizerProfile>
-          </PrivateRoute>
+          <AdminRoute>
+            <PrivateRoute>
+              <OrganizerProfile></OrganizerProfile>
+            </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "manageCamps",
-        element: <ManageCamps></ManageCamps>,
+        element: (
+          <AdminRoute>
+            <ManageCamps></ManageCamps>
+          </AdminRoute>
+        ),
       },
       {
         path: "updateData/:id",
@@ -86,7 +92,7 @@ export const router = createBrowserRouter([
         ),
         // loader: ({ params }) => getAllCamps(params.id),
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/camps/${params.id}`),
+          fetch(`https://project-finale-server.vercel.app/camps/${params.id}`),
       },
 
       {
