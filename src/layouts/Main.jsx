@@ -9,11 +9,15 @@ const Main = () => {
   //   location.pathname.includes("login") || location.pathname.includes("signup");
   return (
     <div>
-      <NavBar></NavBar>
-
-      <Outlet></Outlet>
-
-      <Footer></Footer>
+      <div className="font-che">
+        <NavBar></NavBar>
+      </div>
+      <div className="font-fir">
+        <Outlet></Outlet>
+      </div>
+      <div className="font-fah">
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

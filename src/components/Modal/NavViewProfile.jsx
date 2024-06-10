@@ -51,9 +51,20 @@ const NavViewProfile = () => {
           </Space>
         }
       >
-        <ul>
-          <li>{user ? <NavLink to="dashboard">Dashboard</NavLink> : ""}</li>
-        </ul>
+        <div className="space-y-2">
+          <ul>
+            <li>{user ? <NavLink to="dashboard">Dashboard</NavLink> : ""}</li>
+          </ul>
+          <ul>
+            <li>
+              {user ? (
+                <NavLink to="dashboard/userProfile">User Profile</NavLink>
+              ) : (
+                ""
+              )}
+            </li>
+          </ul>
+        </div>
       </Drawer>
     </>
   );

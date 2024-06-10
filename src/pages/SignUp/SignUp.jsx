@@ -53,12 +53,8 @@ const SignUp = () => {
     <section className="bg-white dark:bg-gray-900">
       <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
-          <div className="flex justify-center mx-auto">
-            <img
-              className="w-auto h-7 sm:h-8"
-              src="https://merakiui.com/images/logo.svg"
-              alt=""
-            />
+          <div className="flex justify-center mx-auto bg-blue-50 font-bold p-2">
+            MedLink Portal
           </div>
 
           <div className="relative flex items-center mt-8">

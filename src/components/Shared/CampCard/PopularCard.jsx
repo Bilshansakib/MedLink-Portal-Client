@@ -12,7 +12,6 @@ import {
 } from "@material-tailwind/react";
 import {
   MdLocationPin,
-  MdOutlineArrowForwardIos,
   MdOutlinePriceChange,
   MdOutlineSick,
   MdReadMore,

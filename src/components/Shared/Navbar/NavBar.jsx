@@ -35,7 +35,7 @@ const NavBar = () => {
         </li>
       </ul>
 
-      {user ? (
+      {/* {!user ? (
         <>
           <button
             onClick={handleLogOut}
@@ -52,7 +52,7 @@ const NavBar = () => {
             </li>
           </ul>
         </>
-      )}
+      )} */}
     </>
   );
 
@@ -62,7 +62,7 @@ const NavBar = () => {
         <div className="lg:flex  lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
             <a href="#">
-              <h1>MedLink Portal</h1>
+              <h1 className="text-2xl">MedLink Portal</h1>
               {/* <img
               className="w-auto h-6 sm:h-7"
               src="https://merakiui.com/images/full-logo.svg"
@@ -235,9 +235,12 @@ const NavBar = () => {
                             fill="#90A4AE"
                           ></path>
                         </svg>
-                        <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
-                          Log Out
-                        </p>
+                        <button
+                          onClick={handleLogOut}
+                          className="btn btn-ghost px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          logOut
+                        </button>
                       </button>
                     </ul>
                   </div>
