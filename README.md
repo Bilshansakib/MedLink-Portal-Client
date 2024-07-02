@@ -1,7 +1,5 @@
 # MedLink Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
 Welcome to MedLink Portal, your comprehensive gateway to medical information, resources, and services. Our platform is designed to connect patients, healthcare professionals, and medical institutions, providing a seamless and integrated experience for all users.
 
 Overview
@@ -10,7 +8,10 @@ MedLink Portal offers a wide range of features to support the diverse needs of t
 Patient Portal: Access your medical records, schedule appointments, communicate with your healthcare providers, and manage your health information securely and conveniently.
 Healthcare Professional Network: Connect with colleagues, share insights, and collaborate on patient care. Access the latest medical research, continuing education opportunities, and professional development resources.
 Medical Institution Hub: Manage patient information, streamline administrative processes, and enhance collaboration among departments. Access tools for efficient hospital and clinic management.
-Features
+
+
+# Features
+
 For Patients
 Medical Records: View and manage your personal health records.
 Appointment Scheduling: Book, reschedule, or cancel appointments with ease.
